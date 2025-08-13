@@ -149,7 +149,9 @@ class AuthViewModel @Inject constructor(
     }
 
     fun checkAuth() {
-        checkAuthUseCase.invoke().launchIn(viewModelScope)
+        checkAuthUseCase.invoke().onEach { result ->
+            _state.value = AuthState(permission = result)
+        }.launchIn(viewModelScope)
     }
 
     fun clearStateError() {

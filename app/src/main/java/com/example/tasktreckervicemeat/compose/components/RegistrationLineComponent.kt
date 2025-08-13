@@ -20,10 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.tasktreckervicemeat.R
-import com.example.tasktreckervicemeat.compose.navigation.Designations.REGISTRATION_EMAIL
-import com.example.tasktreckervicemeat.compose.navigation.Designations.REGISTRATION_PASSWORD
-import com.example.tasktreckervicemeat.compose.navigation.Routes
-import com.example.tasktreckervicemeat.compose.navigation.Designations.REGISTRATION_USERNAME
+import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_EMAIL
+import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_PASSWORD
+import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_USERNAME
 import com.example.tasktreckervicemeat.ui.theme.BlueNeon
 
 @Composable

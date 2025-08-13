@@ -41,7 +41,7 @@ import com.example.tasktreckervicemeat.compose.components.AuthComponent
 import com.example.tasktreckervicemeat.compose.components.CustomButton
 import com.example.tasktreckervicemeat.compose.components.ErrorAlert
 import com.example.tasktreckervicemeat.compose.components.RegistrationLineComponent
-import com.example.tasktreckervicemeat.compose.navigation.Designations.REGISTRATION_USERNAME
+import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_USERNAME
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.BlueNeon
 import com.example.tasktreckervicemeat.ui.theme.Montserrat

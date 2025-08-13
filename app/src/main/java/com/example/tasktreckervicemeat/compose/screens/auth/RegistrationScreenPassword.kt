@@ -1,7 +1,6 @@
 package com.example.tasktreckervicemeat.compose.screens.auth
 
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -43,7 +42,7 @@ import com.example.tasktreckervicemeat.compose.components.AuthComponent
 import com.example.tasktreckervicemeat.compose.components.CustomButton
 import com.example.tasktreckervicemeat.compose.components.ErrorAlert
 import com.example.tasktreckervicemeat.compose.components.RegistrationLineComponent
-import com.example.tasktreckervicemeat.compose.navigation.Designations.REGISTRATION_PASSWORD
+import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_PASSWORD
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.BlueNeon
 import com.example.tasktreckervicemeat.ui.theme.Montserrat

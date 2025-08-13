@@ -1,6 +1,10 @@
-package com.example.tasktreckervicemeat.compose.navigation
+package com.example.tasktreckervicemeat.navigation
 
 object Designations {
+
+    const val LOADING_MAIN = "LOADING_MAIN"
+    const val LOADING = "LOADING"
+
     const val AUTH_AND_REGISTRATION = "AUTH_AND_REG"
     const val LOGIN = "LOGIN"
     const val REGISTRATION_USERNAME = "REGISTRATION_USERNAME"

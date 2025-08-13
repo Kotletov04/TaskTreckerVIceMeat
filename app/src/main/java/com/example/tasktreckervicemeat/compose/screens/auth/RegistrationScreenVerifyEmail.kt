@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -29,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.tasktreckervicemeat.R
 import com.example.tasktreckervicemeat.compose.components.CustomButton
 import com.example.tasktreckervicemeat.compose.components.ErrorAlert
-import com.example.tasktreckervicemeat.compose.components.NeonRabbitAnimationComponent
+import com.example.tasktreckervicemeat.compose.components.animation.NeonRabbitAnimationComponent
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.Montserrat
 import com.example.tasktreckervicemeat.ui.theme.OrangeFF9

@@ -12,17 +12,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomButton(onClick: () -> Unit, text: String) {
+fun CustomButton(onClick: () -> Unit, text: String, width: Dp = 120.dp, fontSize: Int = 14, padding: Dp = 5.dp) {
     Box(
         modifier = Modifier
-            .padding(end = 5.dp, start = 5.dp)
+            .padding(end = padding, start = padding)
             .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(15.dp))
             .clickable { onClick.invoke() }
             .padding(10.dp)
-            .width(120.dp),
-    ) { Text(modifier = Modifier.fillMaxWidth(), text = text, color = Color.White, textAlign = TextAlign.Center) }
+            .width(width),
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = text,
+            color = Color.White,
+            textAlign = TextAlign.Center,
+            fontSize = fontSize.sp
+        )
+    }
 
 }
