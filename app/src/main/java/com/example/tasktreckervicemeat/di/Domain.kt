@@ -1,11 +1,13 @@
 package com.example.tasktreckervicemeat.di
 
 import com.example.domain.repository.AuthRepository
+import com.example.domain.repository.MediaRepository
 import com.example.domain.usecase.auth.CheckAuthUseCase
 import com.example.domain.usecase.auth.LoginUseCase
 import com.example.domain.usecase.auth.LogoutUseCase
 import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.domain.usecase.auth.VerifyCheckEmailUseCase
+import com.example.domain.usecase.hubs.GetImagesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,6 +46,12 @@ class Domain {
     @Singleton
     fun provideLogoutUseCase(authRepository: AuthRepository): LogoutUseCase {
         return LogoutUseCase(authRepository = authRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetImagesUseCase(mediaRepository: MediaRepository): GetImagesUseCase {
+        return GetImagesUseCase(mediaRepository = mediaRepository)
     }
 
 }

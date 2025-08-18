@@ -17,13 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomButton(onClick: () -> Unit, text: String, width: Dp = 120.dp, fontSize: Int = 14, padding: Dp = 5.dp) {
+fun CustomButton(onClick: () -> Unit, text: String, width: Dp = 120.dp, fontSize: Int = 14, padding: Dp = 5.dp, innerPadding: Dp = 10.dp) {
     Box(
         modifier = Modifier
             .padding(end = padding, start = padding)
             .border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(15.dp))
             .clickable { onClick.invoke() }
-            .padding(10.dp)
+            .padding(innerPadding)
             .width(width),
     ) {
         Text(

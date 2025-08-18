@@ -1,6 +1,12 @@
 package com.example.tasktreckervicemeat.compose.components.images
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ContentUris
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.core.tween
@@ -34,30 +40,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.app.ActivityCompat
+import androidx.core.net.toUri
+import coil3.compose.AsyncImage
+import com.example.domain.model.ImageModel
+import com.example.tasktreckervicemeat.MainActivity
 import com.example.tasktreckervicemeat.compose.screens.hubs.HubsScreen
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.BlueNeon
 import com.example.tasktreckervicemeat.ui.theme.Gray31
-import com.example.tasktreckervicemeat.ui.theme.Gray61
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun MediaContainerTest() {
-    val test = remember { mutableStateOf(false) }
-    Box(contentAlignment = Alignment.Center) {
-        HubsScreen()
-        Button(onClick = {test.value = !test.value}) { Text("text")}
-        if (test.value) {
-            MediaContainerComponent(onStart = test, onClickBack = {})
-        }
-
-    }
 
 }
 
@@ -67,7 +75,7 @@ fun MediaContainerTest() {
 
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
-fun MediaContainerComponent(onStart: MutableState<Boolean>, onClickBack: () -> Unit) {
+fun MediaContainerComponent(onStart: MutableState<Boolean>, onClickBack: () -> Unit, images: List<ImageModel>) {
     val containerInStartScroll = remember { mutableStateOf(true) }
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
@@ -103,7 +111,6 @@ fun MediaContainerComponent(onStart: MutableState<Boolean>, onClickBack: () -> U
         ) {
             TopBarMediaContainer(onClickBack = onClickBack, height = topBarHeight)
         }
-
         Column(modifier = Modifier.padding(top = topBarHeight).fillMaxSize()) {
             LazyVerticalGrid(
                 modifier = Modifier
@@ -129,15 +136,20 @@ fun MediaContainerComponent(onStart: MutableState<Boolean>, onClickBack: () -> U
                         Box(modifier = Modifier.width(30.dp).height(2.dp).background(BlueNeon).clip(RoundedCornerShape(30.dp)))
                     }
                 }
-                items(50) {
-                    Box(modifier = Modifier.fillMaxSize().background(Gray31), contentAlignment = Alignment.Center) {
+                items(images) {
+                    /*Box(modifier = Modifier.fillMaxSize().background(Gray31), contentAlignment = Alignment.Center) {
                         Row(modifier = Modifier.padding(3.dp).size(120.dp).background(Color.Red)) {
                             Text(text ="te")
                             Spacer(modifier = Modifier.width(50.dp))
                             Text(text = "")
                         }
-                    }
-
+                    }*/
+                    AsyncImage(
+                        modifier = Modifier.fillMaxSize().background(Gray31),
+                        model = it.uri.toUri(),
+                        contentDescription = null,
+                        contentScale = ContentScale.Fit
+                    )
                 }
 
             }

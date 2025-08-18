@@ -63,7 +63,9 @@ fun UserIconComponent(
     isActive: Boolean = true,
     model: String,
     shape: Shape = CircleShape,
-    borderWidth: Dp
+    borderWidth: Dp,
+    onClickEnabled: Boolean = false,
+    onClick: () -> Unit = {}
 ) {
 
     Box(
@@ -75,7 +77,8 @@ fun UserIconComponent(
                     colors = if (isActive) listOf(Yellow26, PinkDD) else listOf(Gray31, Black19)
                 )
             )
-            .padding(borderWidth),
+            .padding(borderWidth)
+            .clickable(enabled = onClickEnabled, onClick = onClick),
         contentAlignment = Alignment.Center
 
 
