@@ -148,21 +148,28 @@ fun AvatarCroppingComponent(
 
 
     // Вычисляем соотношение сторон, чтобы понять растягивать изображение по ширине или высоте
-    val isHorizontalOrientation = (bitmapWidthPx.toFloat() / bitmapHeightPx) > (screenWidthPx.toFloat() / screenHeightPx)
+    val isHorizontalOrientation = (bitmapWidthPx.toFloat() / bitmapHeightPx) >= (screenWidthPx.toFloat() / screenHeightPx)
     // Размеры Image(bitmap) в зависимости от ориентации
     // Если  горизонтальная, то ширина выставляется по ширине экрана, если наоборот
     // вычисляется по пропорции, float спользуется из-за того, что нельзя перемножать dp на dp
-    val imageWidth by derivedStateOf { if (isHorizontalOrientation) screenWidthDp else (screenHeightDp * bitmapWidthDp.value.toFloat()) / bitmapHeightDp.value.toFloat() }
-    val imageWidthPx = with(density) { imageWidth.toPx() }
+    /*val imageWidth by derivedStateOf { if (isHorizontalOrientation) screenWidthDp else (screenHeightDp * bitmapWidthDp.value.toFloat()) / bitmapHeightDp.value.toFloat() }
+    val imageWidthPx = with(density) { imageWidth.toPx() }*/
+    val imageWidthPx by derivedStateOf { if (isHorizontalOrientation) screenWidthPx else (screenHeightPx * bitmapWidthPx) / bitmapHeightPx }
+    val imageWidth = with(density) { imageWidthPx.toDp() }
+
 
     // Если  вертикальная, то высота выставляется по высоте экрана, если наоборот
     // вычисляется по пропорции, float спользуется из-за того, что нельзя перемножать dp на dp
-    val imageHeight by derivedStateOf { if (!isHorizontalOrientation) screenHeightDp else (screenWidthDp * bitmapHeightDp.value.toFloat()) / bitmapWidthDp.value.toFloat() }
-    val imageHeightPx = with(density) { imageHeight.toPx() }
+    /*val imageHeight by derivedStateOf { if (!isHorizontalOrientation) screenHeightDp else (screenWidthDp * bitmapHeightDp.value.toFloat()) / bitmapWidthDp.value.toFloat() }
+    val imageHeightPx = with(density) { imageHeight.toPx() }*/
+    val imageHeightPx by derivedStateOf { if (!isHorizontalOrientation) screenHeightPx else (screenWidthPx * bitmapHeightPx) / bitmapWidthPx }
+    val imageHeight = with(density) { imageHeightPx.toDp() }
+
+
 
     // Размер круглого фокуса, если ориентация горизонатальная, то
     // тогда фокус растягивается по высоте изображения
-    val initialFocusSize by derivedStateOf { if (isHorizontalOrientation) imageHeight else imageWidth }
+    val initialFocusSize by derivedStateOf { if (isHorizontalOrientation && imageHeight < imageWidth) imageHeight else imageWidth }
     val initialFocusSizePx = with(density) { initialFocusSize.toPx() }
 
     // Обратная пропорция если изображение больше фокус меньше про оффсет так же
@@ -296,21 +303,10 @@ fun AvatarCroppingComponent(
 
 
     }
-    /*Button(onClick = {onStart = !onStart}) { }*/
-    Column(modifier = Modifier.padding(20.dp)) {
-        Text(text = "bitmapWidthPx $bitmapWidthPx.toString()", color = Color.Green)
-        Text(text = "bitmapHeightPx $bitmapHeightPx.toString()", color = Color.Green)
-        Text(text = "screenWidthPx $screenWidthDp.toString()", color = Color.Green)
-        Text(text = "screenHeightPx $screenHeightPx.toString()", color = Color.Green)
-        Text(text = isHorizontalOrientation.toString(), color = Color.Green)
-        Text(text = "screenWidthPx.toFloat() / screenHeightPx ${(screenWidthPx.toFloat() / screenHeightPx)}", color = Color.Green)
-        Text(text = "bitmapWidthPx.toFloat() / bitmapHeightPx ${(bitmapWidthPx.toFloat() / bitmapHeightPx)}", color = Color.Green)
-        Text(text = "initialFocusSize ${initialFocusSize}", color = Color.Green)
-        Text(text = "imageHeight ${imageHeight}", color = Color.Green)
-        Text(text = "imageWidth ${imageWidth}", color = Color.Green)
-    }
+    Button(onClick = {onStart = !onStart}) { }
 
-    /*if (!allInTheBorder && onStart) {
+
+    if (!allInTheBorder && onStart) {
         val testImage = Bitmap.createBitmap(
             bitmap,
             // Оффсет вычисляется с учетом скейла и с учетом размера битмана (вычисляется по пропорции)
@@ -323,6 +319,6 @@ fun AvatarCroppingComponent(
             Image(bitmap = testImage.asImageBitmap(), contentDescription = null)
             Text(text = "+", color = Color.Blue)
         }
-    }*/
+    }
 
 }
