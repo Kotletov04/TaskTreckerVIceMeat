@@ -2,6 +2,8 @@ package com.example.tasktreckervicemeat
 
 import android.Manifest
 import android.content.ContentUris
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -30,22 +32,26 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import coil3.compose.AsyncImage
+import com.example.data.remote.NetworkManager
 import com.example.tasktreckervicemeat.navigation.Routes
 import com.example.tasktreckervicemeat.navigation.graph.authAndRegistrationNavigation
 import com.example.tasktreckervicemeat.compose.screens.hubs.HubsScreen
 import com.example.tasktreckervicemeat.navigation.graph.hubsNavigation
 import com.example.tasktreckervicemeat.navigation.graph.loadingNavigation
+import com.example.tasktreckervicemeat.navigation.graph.profileNavigation
+import com.example.tasktreckervicemeat.receivers.NetworkBroadcastReceiver
 import com.example.tasktreckervicemeat.ui.theme.Gray31
 import com.example.tasktreckervicemeat.ui.theme.TaskTreckerVIceMeatTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
         setContent {
             TaskTreckerVIceMeatTheme {
@@ -54,6 +60,7 @@ class MainActivity : ComponentActivity() {
                     loadingNavigation(navController = navController)
                     authAndRegistrationNavigation(navController = navController)
                     hubsNavigation(navController = navController)
+                    profileNavigation(navController)
                 }
             }
         }

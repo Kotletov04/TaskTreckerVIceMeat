@@ -1,9 +1,9 @@
 package com.example.domain.model
 
 data class TaskModel(
-    val id: Int,
+    val id: String,
     val title: String,
     val description: String,
     val isCompleted: Boolean,
-    val executor: UserModel,
+    val executors: List<UserModel>
 )

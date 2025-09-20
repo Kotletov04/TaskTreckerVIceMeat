@@ -1,5 +1,6 @@
 package com.example.tasktreckervicemeat.compose.screens.auth
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,8 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tasktreckervicemeat.R
-import com.example.tasktreckervicemeat.compose.components.CustomButton
-import com.example.tasktreckervicemeat.compose.components.ErrorAlert
+import com.example.tasktreckervicemeat.compose.components.screen.CustomButton
+import com.example.tasktreckervicemeat.compose.components.screen.ErrorAlert
 import com.example.tasktreckervicemeat.compose.components.animation.NeonRabbitAnimationComponent
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.Montserrat
@@ -40,6 +41,7 @@ fun RegistrationScreenVerifyEmail(viewModel: AuthViewModel, onClickComplete: () 
     val state = viewModel.state.value
     LaunchedEffect(key1 = state.permission) {
         if (viewModel.state.value.permission == true) {
+            viewModel.createNewUser()
             onNavigate.invoke()
         }
     }

@@ -20,8 +20,8 @@ fun NavGraphBuilder.loadingNavigation(navController: NavController) {
             val permission = viewModel.state.value.permission
             LoadingScreen()
             LaunchedEffect(key1 = null) {
-                delay(2000)
                 viewModel.checkAuth()
+                delay(2000)
             }
             LaunchedEffect(key1 = permission) {
                 if (permission == true) {

@@ -6,6 +6,8 @@ import com.example.tasktreckervicemeat.navigation.Designations.HUBS_MAIN
 import com.example.tasktreckervicemeat.navigation.Designations.LOADING
 import com.example.tasktreckervicemeat.navigation.Designations.LOADING_MAIN
 import com.example.tasktreckervicemeat.navigation.Designations.LOGIN
+import com.example.tasktreckervicemeat.navigation.Designations.PROFILE_MAIN
+import com.example.tasktreckervicemeat.navigation.Designations.PROFILE_USER
 import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_EMAIL
 import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_EMAIL_VERIFY
 import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_PASSWORD
@@ -25,4 +27,7 @@ sealed class Routes(val route: String) {
 
     object HubsMain: Routes(route = HUBS_MAIN)
     object HubsList: Routes(route = HUBS_LIST)
+
+    object ProfileMain: Routes(route = PROFILE_MAIN)
+    object ProfileUser: Routes(route = PROFILE_USER)
 }

@@ -57,6 +57,7 @@ fun TestImage() {
 }
 
 
+
 @Composable
 fun UserIconComponent(
     size: Dp,
@@ -67,7 +68,6 @@ fun UserIconComponent(
     onClickEnabled: Boolean = false,
     onClick: () -> Unit = {}
 ) {
-
     Box(
         modifier = Modifier
             .clip(shape = shape)

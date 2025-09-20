@@ -39,7 +39,6 @@ class MediaRepositoryImpl @Inject constructor(private val context: Context): Med
                 val name = cursor.getString(nameColumn)
                 val date = cursor.getString(dateColumn)
                 val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                println("test $uri")
                 arrayList.add(ImageModel(id = id, name = name, data = "data", date = date, uri = uri.toString()))
             }
         }

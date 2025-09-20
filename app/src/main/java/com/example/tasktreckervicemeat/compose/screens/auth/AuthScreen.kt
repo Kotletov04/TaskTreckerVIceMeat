@@ -1,6 +1,5 @@
 package com.example.tasktreckervicemeat.compose.screens.auth
 
-import android.R.attr.visible
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -26,23 +24,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tasktreckervicemeat.compose.components.AuthComponent
-import com.example.tasktreckervicemeat.compose.components.CustomButton
-import com.example.tasktreckervicemeat.compose.components.ErrorAlert
+import com.example.tasktreckervicemeat.compose.components.auth.AuthComponent
+import com.example.tasktreckervicemeat.compose.components.screen.CustomButton
+import com.example.tasktreckervicemeat.compose.components.screen.ErrorAlert
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.BlueNeon
 import com.example.tasktreckervicemeat.ui.theme.OrangeFF

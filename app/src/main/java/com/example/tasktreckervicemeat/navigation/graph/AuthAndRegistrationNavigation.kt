@@ -1,5 +1,6 @@
 package com.example.tasktreckervicemeat.navigation.graph
 
+import android.util.Log
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -67,10 +68,7 @@ fun NavGraphBuilder.authAndRegistrationNavigation(navController: NavController) 
                     }},
                 onClickBack = {},
                 onNavigate = {
-                    navController.navigate(route = Routes.RegistrationVerifyEmail.route) {
-                        popUpTo(0) { inclusive = true }
-                    }
-
+                    navController.navigate(route = Routes.RegistrationVerifyEmail.route)
                 }
             )
         }
@@ -79,7 +77,7 @@ fun NavGraphBuilder.authAndRegistrationNavigation(navController: NavController) 
             RegistrationScreenVerifyEmail(
                 viewModel = viewModel,
                 onClickComplete = { viewModel.verifyEmail() },
-                onNavigate = {navController.navigate("test")}
+                onNavigate = {navController.navigate(Routes.HubsMain.route)}
 
             )
         }

@@ -1,13 +1,22 @@
 package com.example.tasktreckervicemeat.di
 
+import com.example.data.remote.NetworkManager
 import com.example.domain.repository.AuthRepository
+import com.example.domain.repository.HubRepository
 import com.example.domain.repository.MediaRepository
+import com.example.domain.repository.ProfileRepository
+import com.example.domain.repository.UserRepository
 import com.example.domain.usecase.auth.CheckAuthUseCase
 import com.example.domain.usecase.auth.LoginUseCase
 import com.example.domain.usecase.auth.LogoutUseCase
 import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.domain.usecase.auth.VerifyCheckEmailUseCase
+import com.example.domain.usecase.hubs.CreateNewHubUseCase
+import com.example.domain.usecase.hubs.GetAllHubsUseCase
 import com.example.domain.usecase.hubs.GetImagesUseCase
+import com.example.domain.usecase.users.CreateUserUseCase
+import com.example.domain.usecase.users.GetCurrentAuthUserUseCase
+import com.example.domain.usecase.users.GetUserByIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,4 +63,33 @@ class Domain {
         return GetImagesUseCase(mediaRepository = mediaRepository)
     }
 
+    @Provides
+    @Singleton
+    fun provideGetUserByUidUseCase(userRepository: UserRepository): GetUserByIdUseCase {
+        return GetUserByIdUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllHubsUseCase(hubRepository: HubRepository): GetAllHubsUseCase {
+        return GetAllHubsUseCase(hubRepository = hubRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCurrentAuthUserUseCase(userRepository: UserRepository): GetCurrentAuthUserUseCase {
+        return GetCurrentAuthUserUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateUserUseCase(userRepository: UserRepository): CreateUserUseCase {
+        return CreateUserUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateNewHubUseCase(hubRepository: HubRepository): CreateNewHubUseCase {
+        return CreateNewHubUseCase(hubRepository = hubRepository)
+    }
 }

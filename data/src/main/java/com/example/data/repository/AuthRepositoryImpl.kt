@@ -17,6 +17,15 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.coroutines.cancellation.CancellationException
 import androidx.core.content.edit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.supervisorScope
 import retrofit2.HttpException
 import kotlin.coroutines.suspendCoroutine
 
@@ -25,7 +34,6 @@ class AuthRepositoryImpl @Inject constructor(
 ): AuthRepository {
 
     override suspend fun login(email: String, password: String): Boolean {
-
         try {
             val authTask = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             return authTask.user != null

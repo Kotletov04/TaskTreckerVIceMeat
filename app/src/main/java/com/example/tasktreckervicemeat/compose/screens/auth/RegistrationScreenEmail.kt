@@ -37,10 +37,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tasktreckervicemeat.R
-import com.example.tasktreckervicemeat.compose.components.AuthComponent
-import com.example.tasktreckervicemeat.compose.components.CustomButton
-import com.example.tasktreckervicemeat.compose.components.ErrorAlert
-import com.example.tasktreckervicemeat.compose.components.RegistrationLineComponent
+import com.example.tasktreckervicemeat.compose.components.auth.AuthComponent
+import com.example.tasktreckervicemeat.compose.components.screen.CustomButton
+import com.example.tasktreckervicemeat.compose.components.screen.ErrorAlert
+import com.example.tasktreckervicemeat.compose.components.auth.RegistrationLineComponent
 import com.example.tasktreckervicemeat.navigation.Designations.REGISTRATION_EMAIL
 import com.example.tasktreckervicemeat.ui.theme.Black22
 import com.example.tasktreckervicemeat.ui.theme.BlueNeon

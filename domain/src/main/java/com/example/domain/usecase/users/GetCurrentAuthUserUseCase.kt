@@ -8,13 +8,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
 
-class GetUserByUidUseCase(private val userRepository: UserRepository) {
+class GetCurrentAuthUserUseCase(private val userRepository: UserRepository) {
 
-    operator fun invoke(uid: String): Flow<Resource<UserModel>> = flow {
+    operator fun invoke(): Flow<Resource<UserModel>> = flow {
         try {
             emit(Resource.Loading())
-            val user = userRepository.getUserByUid(uid = uid)
-            emit(Resource.Success(data = user))
+            val user = userRepository.getCurrentUser()
+            if (user != null) {
+                emit(Resource.Success(data = user))
+            } else {
+                emit(Resource.Error(message = ErrorMessages.firebaseAuthInvalidUserException))
+            }
         } catch (e: IOException) {
             emit(Resource.Error(message = ErrorMessages.ioException))
         } catch (e: Exception) {

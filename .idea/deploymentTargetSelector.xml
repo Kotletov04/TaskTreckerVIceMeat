@@ -5,16 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ChatScreenTest">
+      <SelectionState runConfigName="Test">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MediaContainerTest">
+      <SelectionState runConfigName="OverlayExample">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="DraggableBox">
+      <SelectionState runConfigName="FixedExample">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="MediaContainerTest (1)">
+      <SelectionState runConfigName="MovingBlackBoxExample">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="GestureExample">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

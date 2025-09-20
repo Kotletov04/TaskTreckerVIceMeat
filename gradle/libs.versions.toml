@@ -22,8 +22,10 @@ retrofit = "2.11.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 coil3 = "3.2.0"
 firebase-auth-play-services = "21.4.0"
+firebase-base-play-services = "18.5.0"
 kotlinx-coroutines = "1.10.2"
 lottie-animation-version = "6.6.6"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,6 +51,7 @@ firebase-analitycs = { group = "com.google.firebase", name = "firebase-analytics
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth"}
 firebase-auth-play-services  = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "firebase-auth-play-services"}
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
+firebase-base-play-services = { group = "com.google.android.gms", name = "play-services-base", version.ref = "firebase-base-play-services"}
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-version" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-version" }

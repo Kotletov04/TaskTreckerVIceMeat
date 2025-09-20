@@ -14,4 +14,7 @@ object Designations {
 
     const val HUBS_MAIN = "HUBS_MAIN"
     const val HUBS_LIST = "HUBS_LIST"
+
+    const val PROFILE_MAIN = "PROFILE_MAIN"
+    const val PROFILE_USER = "PROFILE_USER"
 }

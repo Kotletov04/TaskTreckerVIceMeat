@@ -1,4 +1,4 @@
-package com.example.tasktreckervicemeat.compose.components
+package com.example.tasktreckervicemeat.compose.components.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

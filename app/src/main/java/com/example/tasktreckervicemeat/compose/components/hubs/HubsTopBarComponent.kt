@@ -1,6 +1,7 @@
 package com.example.tasktreckervicemeat.compose.components.hubs
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -20,16 +21,9 @@ import androidx.compose.ui.unit.dp
 import com.example.tasktreckervicemeat.R
 import com.example.tasktreckervicemeat.ui.theme.Black22
 
-@Composable
-@Preview
-private fun TestHubsTopBar() {
-    HubsTopBarComponent()
-}
-
-
 
 @Composable
-fun HubsTopBarComponent() {
+fun HubsTopBarComponent(onClickCreate: () -> Unit) {
 
     Box(
         modifier = Modifier.height(35.dp)
@@ -46,6 +40,7 @@ fun HubsTopBarComponent() {
                 tint = Color.White
             )
             Icon(
+                modifier = Modifier.clickable { onClickCreate.invoke() },
                 painter = painterResource(R.drawable.taskaddicon),
                 contentDescription = null,
                 tint = Color.White
