@@ -2,7 +2,26 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="21">
+      <module name="TaskTreckerVIceMeat.build-logic.main" target="11" />
+      <module name="TaskTreckerVIceMeat.build-logic.test" target="11" />
+      <module name="TaskTreckerVIceMeat.core.main" target="11" />
+      <module name="TaskTreckerVIceMeat.core.model" target="11" />
+      <module name="TaskTreckerVIceMeat.core.model.main" target="11" />
+      <module name="TaskTreckerVIceMeat.core.model.test" target="11" />
+      <module name="TaskTreckerVIceMeat.core.test" target="11" />
+      <module name="TaskTreckerVIceMeat.data.main" target="11" />
       <module name="TaskTreckerVIceMeat.data.test" target="11" />
+      <module name="TaskTreckerVIceMeat.domain" target="11" />
+      <module name="TaskTreckerVIceMeat.domain.main" target="11" />
+      <module name="TaskTreckerVIceMeat.domain.test" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.auth.test" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.chats" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.chats.main" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.chats.test" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.hubs.test" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.main" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.profile.test" target="11" />
+      <module name="TaskTreckerVIceMeat.feature.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -21,5 +22,14 @@ dependencyResolutionManagement {
 
 rootProject.name = "TaskTreckerVIceMeat"
 include(":app")
-include(":domain")
-include(":data")
+include(":core")
+include(":core:domain")
+include(":core:data")
+include(":core:designsystem")
+include(":feature")
+include(":feature:profile")
+include(":feature:hubs")
+include(":feature:auth")
+include(":feature:loading")
+include(":feature:feature-common")
+include(":core:common")

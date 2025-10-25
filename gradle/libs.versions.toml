@@ -1,4 +1,5 @@
 [versions]
+androidDesugarJdkLibs = "2.1.4"
 agp = "8.10.1"
 kotlin = "2.2.0"
 coreKtx = "1.16.0"
@@ -25,6 +26,16 @@ firebase-auth-play-services = "21.4.0"
 firebase-base-play-services = "18.5.0"
 kotlinx-coroutines = "1.10.2"
 lottie-animation-version = "6.6.6"
+aws-sdk-version = "2.81.0"
+aws-sdk-service-version = "1.12.791"
+kotlinx-serialization-json-version = "1.8.0"
+
+
+# For build-logic
+androidGradlePlugin = "8.9.0"
+androidTools = "31.9.0"
+firebasePerfPlugin = "2.0.1"
+firebaseCrashlyticsPlugin = "3.0.6"
 
 
 [libraries]
@@ -46,6 +57,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationUiKtx" }
 
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json-version" }
+
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analitycs = { group = "com.google.firebase", name = "firebase-analytics"}
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth"}
@@ -53,9 +66,11 @@ firebase-auth-play-services  = { group = "com.google.android.gms", name = "play-
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 firebase-base-play-services = { group = "com.google.android.gms", name = "play-services-base", version.ref = "firebase-base-play-services"}
 
+hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt-version"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-version" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-version" }
 hilt-compose-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-nav-version"}
+
 
 retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
@@ -71,6 +86,34 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 lottie-animation = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-animation-version"}
 
+aws-sdk = { module = "com.amazonaws:aws-android-sdk-s3", version.ref = "aws-sdk-version"}
+
+# Преобразует современный байт-код Java в формат, совместимый со старыми средами выполнения Android.
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
+
+
+# Gradle build libraries
+
+# Основной плагин Android Gradle Plugin (AGP)
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+# Библиотека с общими инструментами Android Gradle Plugin
+android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+# Плагин компилятора Jetpack Compose для Kotlin
+compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+# Gradle-плагин Firebase Crashlytics.
+firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
+# Интеграция Firebase Performance Monitoring в Android-приложение
+firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
+# Добавляет поддержку Kotlin в проект
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+# Kotlin Symbol Processing (KSP) плагин.
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp-version" }
+# Gradle-плагин для Room Database
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+
+
+
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -79,10 +122,22 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 firebase = { id = "com.google.gms.google-services", version.ref = "firebase"}
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp-version" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt-version" }
 
 room = { id = "androidx.room", version.ref = "room"}
 
+# Кастомные плагины, определенные для проекта
+meatvice-android-application = { id = "meatvice.android.application" }
+meatvice-android-application-compose = { id = "meatvice.android.application.compose"}
 
+meatvice-android-library-compose = { id = "meatvice.android.library.compose"}
+meatvice-android-library = { id = "meatvice.android.library" }
 
+meatvice-hilt = { id = "meatvice.hilt"}
+
+meatvice-android-feature = { id = "meatvice.android.feature"}
+
+meatvice-firebase = { id = "meatvice.firebase"}
