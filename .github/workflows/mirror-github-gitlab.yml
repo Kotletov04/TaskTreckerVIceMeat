@@ -1,0 +1,32 @@
+name: Mirror and Trigger GitLab CI
+
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - 'feature/**'
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push to Gitlab
+        env:
+          SECRET: ${{ secrets.SECRET}}
+        run: |
+          git remote add gitlab https://oauth2:${SECRET}@gitlab.com:Kotletov04/TaskTreckerVIceMeat.git
+          git push --mirror gitlab
+      - name: Trigger GitLab pipeline
+        env:
+          SECRET: ${{ secrets.SECRET}}
+        run: |
+          curl -x POST \
+            -H "PRIVATE-TOKEN: ${SECRET}" \
+            -F "ref=master" \
+            https://gitlab.com/api/v4/projects/75687010/trigger/pipeline
