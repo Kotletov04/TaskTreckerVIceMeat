@@ -20,7 +20,6 @@ import javax.inject.Inject
 import kotlin.jvm.java
 
 class HubRepositoryImpl @Inject constructor(
-    private val firebaseAuth: FirebaseAuth,
     private val firebaseDb: FirebaseFirestore
 ): HubRepository {
 

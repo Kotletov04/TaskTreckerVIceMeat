@@ -50,8 +50,8 @@ import com.example.designsystem.MeatViceDrawComponents
 import com.example.designsystem.MeatViceIcons
 import com.example.designsystem.MeatViceVectorComponents
 import com.example.designsystem.animation.LoadingLottieAnimationComponent
-import com.example.designsystem.images.ImageModel
 import com.example.designsystem.images.MediaContainerComponent
+import com.example.designsystem.images.MediaImage
 import com.example.designsystem.images.UserIconComponent
 import com.example.designsystem.profile.UserProfileInfoComponent
 import com.example.designsystem.screen.ErrorAlert
@@ -102,9 +102,11 @@ fun ProfileScreen(
             )
         }
     }
-
+    val mediaContainerIsStart = remember { mutableStateOf(false) }
     ProfileMain(
-        viewModel = viewModel
+        viewModel = viewModel,
+        changeStartMediaContainer = { newValue -> mediaContainerIsStart.value = newValue },
+        startMediaContainer = mediaContainerIsStart.value
     )
 }
 
@@ -114,18 +116,22 @@ fun ProfileScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnrememberedMutableState")
 @Composable
 fun ProfileMain(
-    viewModel: ProfileViewModel
+    viewModel: ProfileViewModel,
+    changeStartMediaContainer: (Boolean) -> Unit,
+    startMediaContainer: Boolean,
 ) {
     val density = LocalDensity.current
     val systemTopBarHeight = WindowInsets.statusBars.getTop(density = density)
     val topBarHeightDp = with(density) { systemTopBarHeight.toDp() } * 2 + 40.dp
 
     val popupState = remember { mutableStateOf(false) }
-    val mediaContainerIsStart = remember { mutableStateOf(false) }
+    val mediaContai1qnerIsStart = remember { mutableStateOf(false) }
 
     val mainState = viewModel.mainState.value
     val userState = mainState.userInfoState
     val avatarState = mainState.avatarState
+
+    val newAvatar = remember { mutableStateOf<Bitmap?>(null) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -141,7 +147,7 @@ fun ProfileMain(
                         },
                         onClickCamera = {
                             viewModel.getImages()
-                            mediaContainerIsStart.value = true
+                            changeStartMediaContainer(true)
                             popupState.value = false
                         },
                         onClickEdit = {
@@ -182,15 +188,15 @@ fun ProfileMain(
 
     }
 
-    /*if (mainState.localImages != null && mediaContainerIsStart.value) {
+    if (mainState.localImages != null && startMediaContainer) {
         MediaContainerComponent(
-            onStart = mediaContainerIsStart,
-            onClickBack = { mediaContainerIsStart.value = false },
-            images = mainState.localImages,
+            onStart = changeStartMediaContainer,
+            onClickBack = { changeStartMediaContainer(false) },
+            images = mainState.localImages.map { MediaImage(id = it.id, data = it.data, uri = it.uri, name = it.name, date = it.date) },
             croppedBitmap = { croppedBitmap -> newAvatar.value = croppedBitmap },
             onClickComplete = { }
         )
-    }*/
+    }
 
 }
 

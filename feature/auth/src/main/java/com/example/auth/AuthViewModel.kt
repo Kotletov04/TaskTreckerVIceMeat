@@ -18,7 +18,6 @@ import javax.inject.Inject
 import com.example.domain.usecase.auth.LoginUseCase
 import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.domain.usecase.auth.VerifyCheckEmailUseCase
-import com.example.domain.usecase.auth.CheckAuthUseCase
 import com.example.domain.usecase.users.CreateUserUseCase
 
 
@@ -27,7 +26,6 @@ class AuthViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val registerUseCase: RegisterUseCase,
     private val verifyCheckEmailUseCase: VerifyCheckEmailUseCase,
-    private val checkAuthUseCase: CheckAuthUseCase,
     private val createNewUser: CreateUserUseCase
 ): ViewModel() {
 
@@ -43,7 +41,6 @@ class AuthViewModel @Inject constructor(
     val state: State<AuthState> = _state
 
     fun login() {
-        if (!loginCheckFields()) return
         loginUseCase.invoke(email = email.value, password = password.value).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -59,19 +56,6 @@ class AuthViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun loginCheckFields(): Boolean {
-        if (email.value == "") {
-            _state.value = _state.value.copy(error = ErrorMessages.emptyEmail)
-            return false
-        }
-        if (password.value == "") {
-            _state.value = _state.value.copy(error = ErrorMessages.emptyPassword)
-            return false
-        }
-        return true
-
-    }
-
     fun register() {
         registerUseCase.invoke(email = regEmail.value, password = regPassword.value).onEach { result ->
             when (result) {
@@ -85,7 +69,6 @@ class AuthViewModel @Inject constructor(
                     _state.value = AuthState(userIsRegister = true)
                 }
             }
-
         }.launchIn(viewModelScope)
     }
 
@@ -138,12 +121,6 @@ class AuthViewModel @Inject constructor(
                     _state.value = AuthState(permission = true)
                 }
             }
-        }.launchIn(viewModelScope)
-    }
-
-    fun checkAuth() {
-        checkAuthUseCase.invoke().onEach { result ->
-            _state.value = AuthState(permission = result)
         }.launchIn(viewModelScope)
     }
 

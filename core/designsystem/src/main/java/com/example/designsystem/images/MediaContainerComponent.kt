@@ -75,7 +75,7 @@ import com.example.designsystem.theme.PinkDD
 import com.example.designsystem.theme.Yellow26
 import kotlinx.coroutines.delay
 
-data class ImageModel(
+data class MediaImage(
     val id: Long,
     val name: String,
     val date: String,
@@ -85,9 +85,9 @@ data class ImageModel(
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 fun MediaContainerComponent(
-    onStart: MutableState<Boolean>,
+    onStart: (Boolean) -> Unit,
     onClickBack: () -> Unit,
-    images: List<ImageModel>,
+    images: List<MediaImage>,
     multipleChoiceMode: Boolean = false,
     croppedBitmap: (Bitmap) -> Unit,
     onClickComplete: () -> Unit
@@ -120,7 +120,7 @@ fun MediaContainerComponent(
         if (!mediaIsActive.value) {
             delay(100)
             lazyGridState.animateScrollBy(value = -1000f, animationSpec = tween(500))
-            onStart.value = false
+            onStart(false)
         }
 
     }

@@ -28,7 +28,8 @@ fun NavGraphBuilder.hubsScreen(
         composable<HubsListRoute> {
             HubsScreen(
                 onClickProfile = onClickProfile,
-                onClickLogout = onClickLogout
+                onClickLogout = onClickLogout,
+                onClickHub = {}
             )
         }
     }

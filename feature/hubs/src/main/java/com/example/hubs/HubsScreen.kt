@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
@@ -41,6 +42,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -62,15 +65,59 @@ import com.example.domain.model.UserModel
 import kotlinx.coroutines.launch
 
 
-
-
-
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HubsScreen(
     viewModel: HubsViewModel = hiltViewModel(),
     onClickProfile: () -> Unit,
-    onClickLogout: () -> Unit
+    onClickLogout: () -> Unit,
+    onClickHub: () -> Unit
+) {
+
+    val state = viewModel.state.value
+
+    LaunchedEffect(Unit) {
+        viewModel.getCurrentUser()
+        viewModel.getAllHubs()
+
+    }
+    LaunchedEffect(state.userState?.user) {
+        if (state.userState?.user != null) {
+            viewModel.getCurrentUserAvatar(
+                userId = state.userState.user.id,
+                bucket = "vicemeat"
+            )
+        }
+    }
+
+
+    HubsMain(
+        viewModel = viewModel,
+        onClickProfile = onClickProfile,
+        onClickLogout = onClickLogout,
+        onClickCreateNewHub = {
+            viewModel.createNewHub()
+            viewModel.cleanCreateHubFields()
+        },
+        hubsList = state.hubsState?.hubsList?: emptyList<HubModel>(),
+        user = state.userState?.user,
+        bitmap = state.userState?.avatar?.asImageBitmap()
+    )
+    if (state.hubsState?.isLoading == true) {
+        CircularProgressIndicator()
+    }
+}
+
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun HubsMain(
+    viewModel: HubsViewModel,
+    onClickProfile: () -> Unit,
+    onClickLogout: () -> Unit,
+    onClickCreateNewHub: () -> Unit,
+    hubsList: List<HubModel>,
+    user: UserModel?,
+    bitmap: ImageBitmap?
 ) {
 
     val lazyColumnState = rememberLazyListState()
@@ -84,11 +131,6 @@ fun HubsScreen(
 
     var createHubComponentIsActive by remember { mutableStateOf(false) }
     val state = viewModel.state.value
-
-    LaunchedEffect(Unit) {
-        viewModel.getCurrentUser()
-        viewModel.getAllHubs()
-    }
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -118,11 +160,6 @@ fun HubsScreen(
         },
         drawerState = drawerState
     ) {
-       /*
-
-        CONTENT HUBS
-
-        */
 
         Scaffold(
             modifier = Modifier
@@ -137,13 +174,14 @@ fun HubsScreen(
                     height = heightTopDp,
                     content = {
                         TopBarContent(
-                            user = state.currentUser,
+                            user = user,
                             onClickProfile = onClickProfile,
                             onClickShowModal = {
                                 coroutineScope.launch {
                                     drawerState.open()
                                 }
-                            }
+                            },
+                            bitmap = bitmap
                         )
                     }
                 )
@@ -173,12 +211,9 @@ fun HubsScreen(
                         CreateHubComponent(
                             onClickComplete = {
                                 createHubComponentIsActive = false
-                                viewModel.createNewHub()
-                                viewModel.cleanCreateHubFields()
+                                onClickCreateNewHub()
                                               },
-                            onChangeSwitch = {
-                                viewModel.hubIsOpen.value = !viewModel.hubIsOpen.value
-                                             },
+                            onChangeSwitch = { viewModel.hubIsOpen.value = !viewModel.hubIsOpen.value },
                             onTitleValueChange = { newTitle -> viewModel.hubTitle.value = newTitle },
                             titleValue = viewModel.hubTitle.value,
                             switchIsActive = viewModel.hubIsOpen.value
@@ -187,7 +222,7 @@ fun HubsScreen(
                     }
                 }
 
-                items(state.hubs?: emptyList<HubModel>()) { hub ->
+                items(hubsList) { hub ->
                     HubListItemComponent(
                         hubImageModel = hub.hubImage.toString(),
                         title = hub.title,
@@ -209,7 +244,7 @@ fun HubsScreen(
 
 
 @Composable
-private fun TopBarContent(user: UserModel?, onClickShowModal: () -> Unit, onClickProfile: () -> Unit) {
+private fun TopBarContent(user: UserModel?, onClickShowModal: () -> Unit, onClickProfile: () -> Unit, bitmap: ImageBitmap?) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(
             modifier = Modifier
@@ -243,6 +278,7 @@ private fun TopBarContent(user: UserModel?, onClickShowModal: () -> Unit, onClic
             color = Color.White
         )
         UserIconComponent(
+            bitmap = bitmap,
             size = 30.dp,
             isActive = false,
             shape = CircleShape,

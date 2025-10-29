@@ -12,6 +12,10 @@ class LoginUseCase(private val authRepository: AuthRepository) {
 
     operator fun invoke(email: String, password: String): Flow<Resource<Boolean>> = flow {
         try {
+            if (!loginCheckFields(email = email, password = password)) {
+                emit(Resource.Error(message = "Данные не указаны"))
+                return@flow
+            }
             emit(Resource.Loading())
             val result = authRepository.login(email = email, password = password)
             emit(Resource.Success(data = result))
@@ -20,6 +24,17 @@ class LoginUseCase(private val authRepository: AuthRepository) {
         } catch (e: Exception) {
             emit(Resource.Error(message = e.localizedMessage?: ErrorMessages.unknownError))
         }
+    }
+
+    private fun loginCheckFields(email: String, password: String): Boolean {
+        if (email == "") {
+            return false
+        }
+        if (password == "") {
+            return false
+        }
+        return true
+
     }
 
 }
