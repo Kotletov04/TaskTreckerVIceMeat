@@ -27,7 +27,7 @@ jobs:
         env:
           SECRET: ${{ secrets.SECRET}}
         run: |
-          curl -x POST \
+          curl -X POST \
             -H "PRIVATE-TOKEN: ${SECRET}" \
             -F "ref=master" \
             https://gitlab.com/api/v4/projects/75687010/trigger/pipeline
