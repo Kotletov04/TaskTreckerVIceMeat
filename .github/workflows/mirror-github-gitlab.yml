@@ -21,7 +21,8 @@ jobs:
           SECRET: ${{ secrets.SECRET}}
         run: |
           git remote add gitlab https://oauth2:${SECRET}@gitlab.com/Kotletov04/TaskTreckerVIceMeat.git
-          git push --mirror gitlab
+          git push gitlab --all
+          git push gitlab --tags
       - name: Trigger GitLab pipeline
         env:
           SECRET: ${{ secrets.SECRET}}
