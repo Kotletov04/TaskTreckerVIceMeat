@@ -40,6 +40,8 @@ runUnitTests:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
+#
+
 runAndroidTestUsingMarathon:
   stage: tests
   script:
