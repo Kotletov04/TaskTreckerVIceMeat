@@ -27,4 +27,8 @@ jobs:
         env:
           SECRET_TRIGGER: ${{ secrets.GITLAB_TRIGGER_TOCKEN}}
         run: |
-          curl -X POST -F "TOKEN: ${SECRET_TRIGGER}" -F "ref=master" https://gitlab.com/api/v4/projects/75687010/trigger/pipeline
+          curl -X POST 
+          
+            -F "TOKEN=${SECRET_TRIGGER}" \
+            -F "ref=master" \
+            https://gitlab.com/api/v4/projects/75687010/trigger/pipeline
