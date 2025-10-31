@@ -37,8 +37,8 @@ runUnitTests:
       - "**/build/reports/tests/testDebugUnitTest/index.html"
     expire_in: 10 days
     when: always
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 #
 
@@ -56,8 +56,8 @@ runAndroidTestUsingMarathon:
     - chmod +x /usr/local/bin/marathon-cloud
     - marathon-cloud devices android
     - marathon-cloud run android --application "app/build/outputs/apk/debug/app-debug.apk" --test-application "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk" --name ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME} --project ${MARATHON_CLOUD_PROJECT_ID}
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
 
 assembleSomeBuildFlavor:
   stage: build_flavors
@@ -67,5 +67,5 @@ assembleSomeBuildFlavor:
     paths:
       - app/build/outputs/apk/test_flavor_name/
     expire_in: 10 days
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
