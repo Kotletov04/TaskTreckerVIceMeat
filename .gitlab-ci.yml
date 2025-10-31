@@ -1,4 +1,4 @@
-image: jangrewe/gitlab-ci-android:34-jdk17
+image: jangrewe/gitlab-ci-android:33
 
 stages:
   - lint
