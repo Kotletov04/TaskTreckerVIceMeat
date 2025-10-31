@@ -1,4 +1,4 @@
-image: jangrewe/gitlab-ci-android:33
+image: jangrewe/gitlab-ci-android:34-jdk17
 
 stages:
   - lint
@@ -21,8 +21,8 @@ runAndroidLint:
       - "**/lint-results.html"
     expire_in: 10 days
     when: always
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 
 runUnitTests:
