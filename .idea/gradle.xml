@@ -35,6 +35,7 @@
             <option value="$PROJECT_DIR$/feature/feature-common" />
             <option value="$PROJECT_DIR$/feature/hubs" />
             <option value="$PROJECT_DIR$/feature/loading" />
+            <option value="$PROJECT_DIR$/feature/media-container" />
             <option value="$PROJECT_DIR$/feature/profile" />
           </set>
         </option>
