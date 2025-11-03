@@ -179,9 +179,11 @@ before_script:
 
 build:
   stage: build
+  script:
+    - ./gradlew feature:loading:lint
   cache:
     key: "$CI_PROJECT_NAME"
-    policy: pull-push
+    policy: push
     paths:
       - .gradle/
       - ~/.gradle/
@@ -189,12 +191,16 @@ build:
       - core/**/build/
       - feature/**/build/
       - /sdk/
-
+  artifacts:
+    expire_in: 1 week
 
 testBuild:
   stage: lint
   script:
     - ./gradlew feature:loading:lint
+  cache:
+    key: "$CI_PROJECT_NAME"
+    policy: pull
   artifacts:
     paths:
       - feature/loading/build/reports/lint-results-debug.html
@@ -205,6 +211,9 @@ testBuild2:
   stage: lint
   script:
     - ./gradlew feature:profile:lint
+  cache:
+    key: "$CI_PROJECT_NAME"
+    policy: pull
   artifacts:
     paths:
       - feature/profile/build/reports/lint-results-debug.html
