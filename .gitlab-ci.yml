@@ -1,6 +1,7 @@
 image: vmoon/gitlab-ci-android:34-jdk17
 
 stages:
+  - build # Билд в кэш общих элементов
   - lint
   - tests
   - build_flavors
@@ -11,167 +12,211 @@ stages:
 before_script:
   - chmod +x ./gradlew
 
-#runAndroidLintApp:
+##runAndroidLintApp:
+###  stage: lint
+###  script:
+###    - ./gradlew app:lint
+###  artifacts:
+###    paths:
+###      - "**/lint-results.html"
+###    expire_in: 10 days
+###    when: always
+#
+#runAndroidLintCoreData:
 #  stage: lint
 #  script:
-#    - ./gradlew app:lint
+#    - ./gradlew core:data:lint
 #  artifacts:
 #    paths:
 #      - "**/lint-results.html"
 #    expire_in: 10 days
 #    when: always
+#
+#
+#runAndroidLintCoreDomain:
+#  stage: lint
+#  script:
+#    - ./gradlew core:domain:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#runAndroidLintDesignSystem:
+#  stage: lint
+#  script:
+#    - ./gradlew designsystem:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#
+#runAndroidLintFeatureAuth:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:auth:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#runAndroidLintFeatureCommon:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:feature-common:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#runAndroidLintHubs:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:hubs:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#
+#runAndroidLintFeatureLoading:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:loading:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#
+#runAndroidLintFeatureMediaContainer:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:media-container:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#runAndroidLintFeatureProfile:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:profile:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
+#
+#
+#
+#
+#runUnitTests:
+#  stage: tests
+#  script:
+#    - ./gradlew app:test
+#
+#  artifacts:
+#    paths:
+#      - "**/build/reports/tests/testDebugUnitTest/classes"
+#      - "**/build/reports/tests/testDebugUnitTest/packages"
+#      - "**/build/reports/tests/testDebugUnitTest/index.html"
+#    expire_in: 10 days
+#    when: always
+##  rules:
+##    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#
+##
+#
+#runAndroidTestUsingMarathon:
+#  stage: tests
+#  script:
+#    - ./gradlew app:assembleSomeBuildFlavorDebug
+#    - ./gradlew app:assembleSomeBuildFlavorDebugAndroidTest
+#
+#    - VERSION="1.0.46"
+#    - curl --location https://github.com/MarathonLabs/marathon-cloud-cli/releases/download/${VERSION}/marathon-cloud-v${VERSION}-linux --output /tmp/marathon-cloud
+#    - mkdir -p /marathon
+#    - tar -xzf /tmp/marathon-cloud --directory /marathon
+#    - mv /marathon/marathon-cloud-v${VERSION}-linux/marathon-cloud /usr/local/bin/
+#    - chmod +x /usr/local/bin/marathon-cloud
+#    - marathon-cloud devices android
+#    - marathon-cloud run android --application "app/build/outputs/apk/debug/app-debug.apk" --test-application "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk" --name ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME} --project ${MARATHON_CLOUD_PROJECT_ID}
+##  rules:
+##    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+#
+#assembleSomeBuildFlavor:
+#  stage: build_flavors
+#  script:
+#    - ./gradlew assembleSomeBuildFlavorDebug
+#  artifacts:
+#    paths:
+#      - app/build/outputs/apk/test_flavor_name/
+#    expire_in: 10 days
+##  rules:
+##    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
 
-runAndroidLintCoreData:
-  stage: lint
-  script:
-    - ./gradlew core:data:lint
-  artifacts:
+build:
+  stage: build
+  cache:
+    key: "$CI_PROJECT_NAME"
+    policy: pull-push
     paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
+      - .gradle/
+      - ~/.gradle/
+      - build/
+      - core/**/build/
+      - feature/**/build/
+      - /sdk/
 
 
-runAndroidLintCoreDomain:
-  stage: lint
-  script:
-    - ./gradlew core:domain:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
-
-
-runAndroidLintDesignSystem:
-  stage: lint
-  script:
-    - ./gradlew designsystem:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
-
-
-
-
-runAndroidLintFeatureAuth:
-  stage: lint
-  script:
-    - ./gradlew feature:auth:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
-
-
-
-runAndroidLintFeatureCommon:
-  stage: lint
-  script:
-    - ./gradlew feature:feature-common:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
-
-
-
-runAndroidLintHubs:
-  stage: lint
-  script:
-    - ./gradlew feature:hubs:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
-
-
-
-
-runAndroidLintFeatureLoading:
+testBuild:
   stage: lint
   script:
     - ./gradlew feature:loading:lint
   artifacts:
     paths:
-      - "**/lint-results.html"
+      - feature/loading/build/reports/lint-results-debug.html
     expire_in: 10 days
     when: always
 
-
-
-
-runAndroidLintFeatureMediaContainer:
-  stage: lint
-  script:
-    - ./gradlew feature:media-container:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
-
-
-
-runAndroidLintFeatureProfile:
+testBuild2:
   stage: lint
   script:
     - ./gradlew feature:profile:lint
   artifacts:
     paths:
-      - "**/lint-results.html"
+      - feature/profile/build/reports/lint-results-debug.html
     expire_in: 10 days
     when: always
 
-
-
-
-runUnitTests:
-  stage: tests
-  script:
-    - ./gradlew app:test
-
-  artifacts:
-    paths:
-      - "**/build/reports/tests/testDebugUnitTest/classes"
-      - "**/build/reports/tests/testDebugUnitTest/packages"
-      - "**/build/reports/tests/testDebugUnitTest/index.html"
-    expire_in: 10 days
-    when: always
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-#
-
-runAndroidTestUsingMarathon:
-  stage: tests
-  script:
-    - ./gradlew app:assembleSomeBuildFlavorDebug
-    - ./gradlew app:assembleSomeBuildFlavorDebugAndroidTest
-
-    - VERSION="1.0.46"
-    - curl --location https://github.com/MarathonLabs/marathon-cloud-cli/releases/download/${VERSION}/marathon-cloud-v${VERSION}-linux --output /tmp/marathon-cloud
-    - mkdir -p /marathon
-    - tar -xzf /tmp/marathon-cloud --directory /marathon
-    - mv /marathon/marathon-cloud-v${VERSION}-linux/marathon-cloud /usr/local/bin/
-    - chmod +x /usr/local/bin/marathon-cloud
-    - marathon-cloud devices android
-    - marathon-cloud run android --application "app/build/outputs/apk/debug/app-debug.apk" --test-application "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk" --name ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME} --project ${MARATHON_CLOUD_PROJECT_ID}
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
-
-assembleSomeBuildFlavor:
-  stage: build_flavors
-  script:
-    - ./gradlew assembleSomeBuildFlavorDebug
-  artifacts:
-    paths:
-      - app/build/outputs/apk/test_flavor_name/
-    expire_in: 10 days
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+##runAndroidLintApp:
+###  stage: lint
+###  script:
+###    - ./gradlew app:lint
+###  artifacts:
+###    paths:
+###      - "**/lint-results.html"
+###    expire_in: 10 days
+###    when: always
