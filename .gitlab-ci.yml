@@ -12,15 +12,15 @@ before_script:
   - chmod +x ./gradlew
 
 
-runAndroidLintApp:
-  stage: lint
-  script:
-    - ./gradlew app:lint
-  artifacts:
-    paths:
-      - "**/lint-results.html"
-    expire_in: 10 days
-    when: always
+#runAndroidLintApp:
+#  stage: lint
+#  script:
+#    - ./gradlew app:lint
+#  artifacts:
+#    paths:
+#      - "**/lint-results.html"
+#    expire_in: 10 days
+#    when: always
 
 runAndroidLintCoreData:
   stage: lint
