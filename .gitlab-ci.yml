@@ -180,7 +180,7 @@ before_script:
 build:
   stage: build
   script:
-    - ./gradlew feature:loading:lint
+    - ./gradlew assembleDebug
   cache:
     key: "$CI_PROJECT_NAME"
     policy: push
