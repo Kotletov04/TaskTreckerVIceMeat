@@ -4,8 +4,8 @@ name: Mirror and Trigger GitLab CI
 on:
   push:
     branches:
-#      - master
-      - develop
+      - master
+#      - develop
 #      - 'feature/**'
 
 
