@@ -8,9 +8,6 @@
       <SelectionState runConfigName="Test">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="OverlayExample">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="FixedExample">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>

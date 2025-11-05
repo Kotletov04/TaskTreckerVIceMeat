@@ -4,9 +4,9 @@ name: Mirror and Trigger GitLab CI
 on:
   push:
     branches:
-      - master
-      - dev
-      - 'feature/**'
+#      - master
+      - develop
+#      - 'feature/**'
 
 
 jobs:
@@ -24,10 +24,10 @@ jobs:
           git remote add gitlab https://oauth2:${SECRET}@gitlab.com/Kotletov04/TaskTreckerVIceMeat.git
           git push gitlab --all
           git push gitlab --tags
-      - name: Trigger GitLab pipeline
-        env:
-          SECRET_TRIGGER: ${{ secrets.GITLAB_TRIGGER_TOCKEN }}
-        run: |
-          curl -v -X POST "https://gitlab.com/api/v4/projects/75687010/trigger/pipeline" \
-            -F token=${SECRET_TRIGGER} \
-            -F ref=master 
+#      - name: Trigger GitLab pipeline
+#        env:
+#          SECRET_TRIGGER: ${{ secrets.GITLAB_TRIGGER_TOCKEN }}
+#        run: |
+#          curl -v -X POST "https://gitlab.com/api/v4/projects/75687010/trigger/pipeline" \
+#            -F token=${SECRET_TRIGGER} \
+#            -F ref=master
