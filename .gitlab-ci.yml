@@ -3,6 +3,9 @@ image: vmoon/gitlab-ci-android:34-jdk17
 
 include:
   - local: 'stages/.gitlab-ci-build.yml'
+  - local: 'stages/.gitlab-ci-lint.yml'
+  - local: 'stages/.gitlab-ci-unit-tests.yml'
+
 
 stages:
   - build # Билд в кэш общих элементов
@@ -22,17 +25,17 @@ before_script:
 
 
 
-testRunTests:
-  stage: tests
-  script:
-    - ./gradlew core:data:test
-  cache:
-    key: "$CI_PROJECT_NAME"
-    policy: pull
-  artifacts:
-    paths:
-      - core/data/build/reports/tests/testDebugUnitTest/classes
-      - core/data/build/reports/tests/testDebugUnitTest/packages
-      - core/data/build/reports/tests/testDebugUnitTest/index.html
-    expire_in: 10 days
-    when: always
+#testRunTests:
+#  stage: tests
+#  script:
+#    - ./gradlew core:data:test
+#  cache:
+#    key: "$CI_PROJECT_NAME"
+#    policy: pull
+#  artifacts:
+#    paths:
+#      - core/data/build/reports/tests/testDebugUnitTest/classes
+#      - core/data/build/reports/tests/testDebugUnitTest/packages
+#      - core/data/build/reports/tests/testDebugUnitTest/index.html
+#    expire_in: 10 days
+#    when: always

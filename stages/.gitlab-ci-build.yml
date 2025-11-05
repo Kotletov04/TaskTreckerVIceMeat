@@ -2,7 +2,7 @@
 build:
   stage: build
   script:
-    - ./gradlew assembleDebug --build-cache --parallel -no-daemon --configure-on-demand
+    - ./gradlew assembleDebug --build-cache --parallel --no-daemon --configure-on-demand
   cache:
     key: "$CI_PROJECT_NAME"
     policy: push

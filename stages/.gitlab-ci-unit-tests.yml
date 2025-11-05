@@ -1,0 +1,15 @@
+
+runUnitTests:
+  stage: tests
+  script:
+    - ./gradlew app:testDebugUnitTest
+  artifacts:
+    paths:
+      - "**/build/reports/tests/testDebugUnitTest/classes"
+      - "**/build/reports/tests/testDebugUnitTest/packages"
+      - "**/build/reports/tests/testDebugUnitTest/index.html"
+    expire_in: 10 days
+    when: always
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#
