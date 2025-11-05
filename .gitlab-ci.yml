@@ -194,31 +194,35 @@ build:
   artifacts:
     expire_in: 1 week
 
-testBuild:
-  stage: lint
+#testBuild2:
+#  stage: lint
+#  script:
+#    - ./gradlew feature:profile:lint
+#  cache:
+#    key: "$CI_PROJECT_NAME"
+#    policy: pull
+#  artifacts:
+#    paths:
+#      - feature/profile/build/reports/lint-results-debug.html
+#    expire_in: 10 days
+#    when: always
+
+testRunTests:
+  stage: tests
   script:
-    - ./gradlew feature:loading:lint
+    - ./gradlew core:data:test
   cache:
     key: "$CI_PROJECT_NAME"
     policy: pull
   artifacts:
     paths:
-      - feature/loading/build/reports/lint-results-debug.html
+      - core/data/build/reports/tests/testDebugUnitTest/classes
+      - core/data/build/reports/tests/testDebugUnitTest/packages
+      - core/data/build/reports/tests/testDebugUnitTest/index.html
     expire_in: 10 days
     when: always
 
-testBuild2:
-  stage: lint
-  script:
-    - ./gradlew feature:profile:lint
-  cache:
-    key: "$CI_PROJECT_NAME"
-    policy: pull
-  artifacts:
-    paths:
-      - feature/profile/build/reports/lint-results-debug.html
-    expire_in: 10 days
-    when: always
+
 
 ##runAndroidLintApp:
 ###  stage: lint
