@@ -1,0 +1,119 @@
+
+runAndroidLintCoreData:
+  stage: lint
+  script:
+    - ./gradlew core:data:lint
+  artifacts:
+    paths:
+      - "core/data/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+runAndroidLintCoreDomain:
+  stage: lint
+  script:
+    - ./gradlew core:domain:lint
+  artifacts:
+    paths:
+      - "core/domain/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+runAndroidLintDesignSystem:
+  stage: lint
+  script:
+    - ./gradlew core:designsystem:lint
+  artifacts:
+    paths:
+      - "core/designsystem/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+
+runAndroidLintFeatureAuth:
+  stage: lint
+  script:
+    - ./gradlew feature:auth:lint
+  artifacts:
+    paths:
+      - "feature/auth/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+runAndroidLintFeatureCommon:
+  stage: lint
+  script:
+    - ./gradlew feature:feature-common:lint
+  artifacts:
+    paths:
+      - "feature/feature-common/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+runAndroidLintHubs:
+  stage: lint
+  script:
+    - ./gradlew feature:hubs:lint
+  artifacts:
+    paths:
+      - "feature/hubs/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+runAndroidLintFeatureLoading:
+  stage: lint
+  script:
+    - ./gradlew feature:loading:lint
+  artifacts:
+    paths:
+      - "feature/loading/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+
+
+runAndroidLintFeatureMediaContainer:
+  stage: lint
+  script:
+    - ./gradlew feature:media-container:lint
+  artifacts:
+    paths:
+      - "feature/media-container/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+
+runAndroidLintFeatureProfile:
+  stage: lint
+  script:
+    - ./gradlew feature:profile:lint
+  artifacts:
+    paths:
+      - "feature/profile/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
+
+
+runAndroidLintApp:
+  stage: lint
+  script:
+    - ./gradlew app:lint
+  artifacts:
+    paths:
+      - "app/build/reports/lint-results-debug.html"
+    expire_in: 10 days
+    when: always
