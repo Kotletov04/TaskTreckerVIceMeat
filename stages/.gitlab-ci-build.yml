@@ -1,0 +1,18 @@
+
+build:
+  stage: build
+  script:
+    - ./gradlew assembleDebug --build-cache --parallel -no-daemon --configure-on-demand
+  cache:
+    key: "$CI_PROJECT_NAME"
+    policy: push
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+  artifacts:
+    expire_in: 1 week

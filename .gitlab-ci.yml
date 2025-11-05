@@ -1,5 +1,9 @@
 image: vmoon/gitlab-ci-android:34-jdk17
 
+
+include:
+  - local: 'stages/.gitlab-ci-build.yml'
+
 stages:
   - build # Билд в кэш общих элементов
   - lint
@@ -13,22 +17,10 @@ before_script:
   - chmod +x ./gradlew
 
 
-build:
-  stage: build
-  script:
-    - ./gradlew assembleDebug --build-cache --parallel -no-daemon --configure-on-demand
-  cache:
-    key: "$CI_PROJECT_NAME"
-    policy: push
-    paths:
-      - .gradle/
-      - ~/.gradle/
-      - build/
-      - core/**/build/
-      - feature/**/build/
-      - /sdk/
-  artifacts:
-    expire_in: 1 week
+
+
+
+
 
 testRunTests:
   stage: tests
