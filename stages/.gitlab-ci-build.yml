@@ -3,7 +3,8 @@ build:
   stage: build
   script:
 #    - cp gradle.ci.properties gradle.properties
-    - ./gradlew assembleDebug --build-cache --parallel --no-daemon --configure-on-demand --configuration-cache --scan
+    - ./gradlew assembleDebug --build-cache --parallel --no-daemon --configure-on-demand --configuration-cache
+#    - ./gradlew assembleDebug --build-cache --parallel --no-daemon --configure-on-demand --configuration-cache --scan
     - free -h && top -b -n 1 | head -20  # Перед и после gradlew, чтобы увидеть, где bottleneck
   cache:
     key: "$CI_PROJECT_NAME"
