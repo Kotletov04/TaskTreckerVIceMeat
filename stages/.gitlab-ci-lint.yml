@@ -1,6 +1,8 @@
 
 runAndroidLintCoreData:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew core:data:lint
   artifacts:
@@ -8,10 +10,23 @@ runAndroidLintCoreData:
       - "core/data/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 runAndroidLintCoreDomain:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew core:domain:lint
   artifacts:
@@ -19,11 +34,22 @@ runAndroidLintCoreDomain:
       - "core/domain/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 runAndroidLintDesignSystem:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew core:designsystem:lint
   artifacts:
@@ -31,12 +57,24 @@ runAndroidLintDesignSystem:
       - "core/designsystem/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 
 runAndroidLintFeatureAuth:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew feature:auth:lint
   artifacts:
@@ -44,11 +82,23 @@ runAndroidLintFeatureAuth:
       - "feature/auth/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 runAndroidLintFeatureCommon:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew feature:feature-common:lint
   artifacts:
@@ -56,11 +106,23 @@ runAndroidLintFeatureCommon:
       - "feature/feature-common/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 runAndroidLintHubs:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew feature:hubs:lint
   artifacts:
@@ -68,11 +130,23 @@ runAndroidLintHubs:
       - "feature/hubs/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 runAndroidLintFeatureLoading:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew feature:loading:lint
   artifacts:
@@ -80,13 +154,25 @@ runAndroidLintFeatureLoading:
       - "feature/loading/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 
 
 runAndroidLintFeatureMediaContainer:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew feature:media-container:lint
   artifacts:
@@ -94,11 +180,23 @@ runAndroidLintFeatureMediaContainer:
       - "feature/media-container/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 
 runAndroidLintFeatureProfile:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew feature:profile:lint
   artifacts:
@@ -106,10 +204,22 @@ runAndroidLintFeatureProfile:
       - "feature/profile/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
-
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
 
 runAndroidLintApp:
   stage: lint
+  dependencies:
+    - build
   script:
     - ./gradlew app:lint
   artifacts:
@@ -117,3 +227,14 @@ runAndroidLintApp:
       - "app/build/reports/lint-results-debug.html"
     expire_in: 10 days
     when: always
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - /sdk/
+    policy: pull
