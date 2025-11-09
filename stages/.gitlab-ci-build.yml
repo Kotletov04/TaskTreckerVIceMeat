@@ -3,9 +3,8 @@ build:
   stage: build
   script:
     - cp gradle.ci.properties gradle.properties
-#    - ./gradlew assembleDebug --build-cache --parallel --configure-on-demand --configuration-cache --scan
     - ./gradlew assembleDebug
-    - free -h && top -b -n 1 | head -20  # Перед и после gradlew, чтобы увидеть, где bottleneck
+    - free -h && top -b -n 1 | head -20
   cache:
     key: "$CI_PROJECT_NAME"
     paths:
@@ -15,9 +14,17 @@ build:
       - core/**/build/
       - app/**/build/
       - feature/**/build/
-      - /sdk/
+      - sdk/
     policy: push
   artifacts:
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - sdk/
     expire_in: 1 week
 
 

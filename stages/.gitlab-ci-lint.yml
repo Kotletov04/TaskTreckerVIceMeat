@@ -3,11 +3,14 @@ runAndroidLintCoreData:
   stage: lint
   dependencies:
     - build
+  needs:
+    - job: build
+      artifacts: true
   script:
     - ./gradlew core:data:lint
   artifacts:
     paths:
-      - "core/data/build/reports/lint-results-debug.html"
+      - core/data/build/reports/lint-results-debug.html
     expire_in: 10 days
     when: always
   cache:
@@ -19,7 +22,7 @@ runAndroidLintCoreData:
       - core/**/build/
       - app/**/build/
       - feature/**/build/
-      - /sdk/
+      - sdk/
     policy: pull
 
 
