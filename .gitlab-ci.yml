@@ -18,7 +18,7 @@ stages:
 testBuild:
   stage: build
   script:
-    - ./gradlew CreateFile -x assembleDebug -x build
+    - ./gradlew :CreateFile -x assembleDebug -x build
   cache:
     key: "$CI_PROJECT_NAME"
     paths:
@@ -28,7 +28,7 @@ testBuild:
 testLint:
   stage: lint
   script:
-    - ./gradlew printTextFile -x assembleDebug -x build
+    - ./gradlew :printTextFile -x assembleDebug -x build
   cache:
     key: "$CI_PROJECT_NAME"
     paths:
