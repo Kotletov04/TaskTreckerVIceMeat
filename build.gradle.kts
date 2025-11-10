@@ -11,3 +11,22 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.serialization) apply false
 }
+tasks.register("CreateFile") {
+    description = "Creates a sample text file."
+    doLast {
+        val outputFile = project.layout.buildDirectory.file("generated/myFileeeee.txt").get().asFile
+        outputFile.parentFile.mkdirs() // Ensure the parent directories exist
+        outputFile.writeText("This is the content of my generated file.")
+        println("File created: ${outputFile.absolutePath}")
+    }
+}
+tasks.register("printTextFile") {
+    description = "Читает содержимое файла text.txt и выводит его в консоль"
+    group = "utility"
+
+    doLast {
+        val file = file("build/generated/myFileeeee.txt") // можно заменить на свой путь
+        println(file.exists())
+
+    }
+}
