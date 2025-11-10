@@ -1,10 +1,10 @@
 image: vmoon/gitlab-ci-android:34-jdk17
 
-#
-#include:
-#  - local: 'stages/.gitlab-ci-build.yml'
-#  - local: 'stages/.gitlab-ci-lint.yml'
-#  - local: 'stages/.gitlab-ci-unit-tests.yml'
+
+include:
+  - local: 'stages/.gitlab-ci-build.yml'
+  - local: 'stages/.gitlab-ci-lint.yml'
+  - local: 'stages/.gitlab-ci-unit-tests.yml'
 
 
 stages:
@@ -15,27 +15,9 @@ stages:
   - release
   - create_git_tag
 
-testBuild:
-  stage: build
-  script:
-    - ./gradlew CreateFile -x assembleDebug -x build
-  cache:
-    key: "$CI_PROJECT_NAME"
-    paths:
-      - build/generated/myFileeeee.txt
-    policy: push
-
-testLint:
-  stage: lint
-  script:
-    - ./gradlew printTextFile -x assembleDebug -x build
-  cache:
-    key: "$CI_PROJECT_NAME"
-    paths:
-      - build/generated/myFileeeee.txt
-    policy: pull
-
 before_script:
   - chmod +x ./gradlew
+
+
 
 

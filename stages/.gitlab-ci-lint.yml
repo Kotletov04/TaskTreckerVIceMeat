@@ -1,4 +1,22 @@
-#
+
+
+
+testLint:
+  stage: lint
+  script:
+    - ./gradlew checkGeneratedDir -x assembleDebug -x build
+  cache:
+    key: "$CI_PROJECT_NAME"
+    paths:
+      - .gradle/
+      - build/
+      - build-logic/.gradle/
+      - core/**/build/
+      - app/**/build/
+      - feature/**/build/
+      - sdk/
+    policy: pull
+
 #runAndroidLintCoreData:
 #  stage: lint
 #  dependencies:

@@ -30,3 +30,16 @@ tasks.register("printTextFile") {
 
     }
 }
+tasks.register("checkGeneratedDir") {
+    description = "Проверяет, существует ли директория build/generated"
+    group = "utility"
+
+    doLast {
+        val dir = file("build/generated") // путь к директории
+        if (dir.exists() && dir.isDirectory) {
+            println("true ${dir.absolutePath}")
+        } else {
+            println("false ${dir.absolutePath}")
+        }
+    }
+}
