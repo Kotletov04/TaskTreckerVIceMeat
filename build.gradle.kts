@@ -35,7 +35,7 @@ tasks.register("checkGeneratedDir") {
     group = "utility"
 
     doLast {
-        val dir = file("- core/domain/build/") // путь к директории
+        val dir = file("core/domain/build/") // путь к директории
         if (dir.exists() && dir.isDirectory) {
             println("true ${dir.absolutePath}")
         } else {
