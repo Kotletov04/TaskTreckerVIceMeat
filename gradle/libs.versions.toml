@@ -3,8 +3,8 @@ androidDesugarJdkLibs = "2.1.4"
 agp = "8.10.1"
 kotlin = "2.2.0"
 coreKtx = "1.16.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
+junit-version = "5.8.1"
+juinit-platform-suite-version = "1.8.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
@@ -30,7 +30,6 @@ aws-sdk-version = "2.81.0"
 aws-sdk-service-version = "1.12.791"
 kotlinx-serialization-json-version = "1.8.0"
 
-
 # For build-logic
 androidGradlePlugin = "8.9.0"
 androidTools = "31.9.0"
@@ -38,11 +37,17 @@ firebasePerfPlugin = "2.0.1"
 firebaseCrashlyticsPlugin = "3.0.6"
 
 
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+juinit-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit-version" }
+juinit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-version" }
+juinit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-version" }
+juinit-platform-suite = { group = "org.junit.platform", name = "junit-platform-suite", version.ref = "juinit-platform-suite-version" }
+
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -92,6 +97,8 @@ aws-sdk = { module = "com.amazonaws:aws-android-sdk-s3", version.ref = "aws-sdk-
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 
 
+
+
 # Gradle build libraries
 
 # Основной плагин Android Gradle Plugin (AGP)
@@ -110,6 +117,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp-version" }
 # Gradle-плагин для Room Database
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+
 
 
 
