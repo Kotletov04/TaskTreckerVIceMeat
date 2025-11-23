@@ -16,7 +16,6 @@ tasks.withType<Test> {
 }
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
-
     testImplementation(libs.juinit.api)
     testImplementation(libs.juinit.platform.suite)
     testImplementation(libs.juinit.engine)

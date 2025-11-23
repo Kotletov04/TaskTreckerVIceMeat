@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import com.example.domain.util.ErrorMessages
+
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import com.example.domain.util.Resource
@@ -19,6 +19,7 @@ import com.example.domain.usecase.auth.LoginUseCase
 import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.domain.usecase.auth.VerifyCheckEmailUseCase
 import com.example.domain.usecase.users.CreateUserUseCase
+import com.example.domain.util.Errors
 
 
 @HiltViewModel
@@ -74,7 +75,7 @@ class AuthViewModel @Inject constructor(
 
     fun checkRegistrationEmail(): Boolean {
         if (regEmail.value == "") {
-            _state.value = _state.value.copy(error = ErrorMessages.emptyEmail)
+            _state.value = _state.value.copy(error = Errors.EmptyEmail.error)
             return false
         }
         return true
@@ -82,7 +83,7 @@ class AuthViewModel @Inject constructor(
 
     fun checkRegistrationUsername(): Boolean {
         if (username.value == "") {
-            _state.value = _state.value.copy(error = ErrorMessages.emptyUsername)
+            _state.value = _state.value.copy(error = Errors.EmptyUsername.error)
             return false
         }
         return true
@@ -90,19 +91,19 @@ class AuthViewModel @Inject constructor(
 
     fun checkRegistrationPassword(): Boolean {
         if (regPassword.value == "") {
-            _state.value = _state.value.copy(error = ErrorMessages.emptyPassword)
+            _state.value = _state.value.copy(error = Errors.EmptyPassword.error)
             return false
         }
         if (repPassword.value == "") {
-            _state.value = _state.value.copy(error = ErrorMessages.emptyRepeatPassword)
+            _state.value = _state.value.copy(error = Errors.EmptyRepeatPassword.error)
             return false
         }
         if (regPassword.value.length <= 6) {
-            _state.value = _state.value.copy(error = ErrorMessages.invalidLenghtPassword)
+            _state.value = _state.value.copy(error = Errors.FirebaseAuthWeakPasswordException.error)
             return false
         }
         if (regPassword.value != repPassword.value) {
-            _state.value = _state.value.copy(error = ErrorMessages.passwordDoNotMatch)
+            _state.value = _state.value.copy(error = Errors.PasswordDoNotMatch.error)
             return false
         }
         return true

@@ -3,7 +3,7 @@ package com.example.domain.usecase.hubs
 import com.example.domain.model.HubModel
 import com.example.domain.model.UserModel
 import com.example.domain.repository.HubRepository
-import com.example.domain.util.ErrorMessages
+import com.example.domain.util.Errors
 import com.example.domain.util.Resource
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.Flow
@@ -31,9 +31,9 @@ class CreateNewHubUseCase(private val hubRepository: HubRepository) {
             hubRepository.createHub(hub = HubModel(title = title, adminName = adminName, adminId = adminId, isOpen = isOpen))
             emit(Resource.Success(data = true))
         } catch (e: IOException) {
-            emit(Resource.Error(message = ErrorMessages.ioException))
+            emit(Resource.Error(message = Errors.IOException.error))
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage?: ErrorMessages.unknownError))
+            emit(Resource.Error(message = e.localizedMessage?: Errors.UnknownError.error))
         }
     }
 

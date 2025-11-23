@@ -5,7 +5,6 @@ import com.example.data.dto.HubDto
 import com.example.data.dto.UserDto
 import com.example.domain.model.HubModel
 import com.example.domain.repository.HubRepository
-import com.example.domain.util.ErrorMessages
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore

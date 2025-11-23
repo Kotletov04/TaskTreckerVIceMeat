@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.auth.navigation.authAndRegistrationScreen
+import com.example.auth.navigation.navigateToAuthAndRegistrationScreen
 import com.example.auth.navigation.navigateToRegistrationEmailRoute
 import com.example.auth.navigation.navigateToRegistrationPasswordRoute
 import com.example.auth.navigation.navigateToRegistrationUsernameRoute
@@ -33,7 +34,7 @@ fun OnlineMeatViceNavHost(
         )
         hubsScreen(
             onClickProfile = navController::navigateToBaseProfile,
-            onClickLogout = {},
+            onClickLogout = navController::navigateToAuthAndRegistrationScreen,
         )
         profileScreen(
             navController = navController
