@@ -1,18 +1,13 @@
+package auth
+
 import com.example.domain.usecase.auth.LoginUseCase
-import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.domain.util.Errors
-import com.example.domain.util.Resource
 import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import repository.FakeAuthRepository
-
-
-
-
 
 class LoginUseCaseTest {
 
@@ -33,7 +28,7 @@ class LoginUseCaseTest {
 
         val result = loginUseCaseTest.invoke(email = fakeEmail, password = fakePassword).last()
 
-        assertEquals(result.data, true)
+        Assertions.assertEquals(result.data, true)
     }
 
     @Test
@@ -43,8 +38,8 @@ class LoginUseCaseTest {
 
         val result = loginUseCaseTest.invoke(email = fakeEmail, password = fakePassword).last()
 
-        assertEquals(result.data, null)
-        assertEquals(result.message, Errors.NoInputData.error)
+        Assertions.assertEquals(result.data, null)
+        Assertions.assertEquals(result.message, Errors.NoInputData.error)
     }
 
     @Test
@@ -54,8 +49,8 @@ class LoginUseCaseTest {
 
         val result = loginUseCaseTest.invoke(email = fakeEmail, password = fakePassword).last()
 
-        assertEquals(result.data, null)
-        assertEquals(result.message, Errors.InvalidData.error)
+        Assertions.assertEquals(result.data, null)
+        Assertions.assertEquals(result.message, Errors.InvalidData.error)
     }
 
 

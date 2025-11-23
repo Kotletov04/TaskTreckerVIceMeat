@@ -1,18 +1,13 @@
-import com.example.domain.usecase.auth.CheckAuthUseCase
+package auth
+
 import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.domain.util.Errors
-import com.example.domain.util.Resource
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import repository.FakeAuthRepository
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.assertEquals
 
 class RegisterUseCaseTest {
 
@@ -33,9 +28,10 @@ class RegisterUseCaseTest {
         val fakeUserPassword = "12345678"
         val fakeUserEmail = "example@gmail.com"
 
-        val result = registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
+        val result =
+            registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
 
-        assertEquals(result.data, true)
+        Assertions.assertEquals(result.data, true)
 
     }
 
@@ -44,10 +40,11 @@ class RegisterUseCaseTest {
         val fakeUserPassword = "1234567"
         val fakeUserEmail = "example@gmail.com"
 
-        val result = registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
+        val result =
+            registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
 
-        assertEquals(result.message, Errors.FirebaseAuthWeakPasswordException.error)
-        assertEquals(null, result.data)
+        Assertions.assertEquals(result.message, Errors.FirebaseAuthWeakPasswordException.error)
+        Assertions.assertEquals(null, result.data)
     }
 
     @Test
@@ -56,10 +53,11 @@ class RegisterUseCaseTest {
         val fakeUserEmail = "example@gmail.com"
         fakeAuthRepository.networkIsConnected = false
 
-        val result = registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
+        val result =
+            registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
 
-        assertEquals(result.message, Errors.IOException.error)
-        assertEquals(null, result.data)
+        Assertions.assertEquals(result.message, Errors.IOException.error)
+        Assertions.assertEquals(null, result.data)
     }
 
     @Test
@@ -69,10 +67,11 @@ class RegisterUseCaseTest {
         fakeAuthRepository.fakeUserPassword = "12345678"
         fakeAuthRepository.fakeUserEmail = "example@gmail.com"
 
-        val result = registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
+        val result =
+            registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
 
-        assertEquals(result.message, Errors.FirebaseAuthUserCollisionException.error)
-        assertEquals(null, result.data)
+        Assertions.assertEquals(result.message, Errors.FirebaseAuthUserCollisionException.error)
+        Assertions.assertEquals(null, result.data)
     }
 
 

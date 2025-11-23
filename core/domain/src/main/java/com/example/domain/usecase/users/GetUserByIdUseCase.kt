@@ -15,11 +15,13 @@ class GetUserByIdUseCase(private val userRepository: UserRepository) {
         try {
             emit(Resource.Loading())
             val user = userRepository.getUserById(id = id)
-            emit(Resource.Success(data = user))
+            emit(Resource.Success(data = user!!))
         } catch (e: IOException) {
             emit(Resource.Error(message = Errors.IOException.error))
         } catch (e: Exception) {
             emit(Resource.Error(message = e.localizedMessage?: Errors.UnknownError.error))
+        } catch (e: NullPointerException) {
+            emit(Resource.Error(message = Errors.FirebaseAuthInvalidUserException.error))
         }
     }
 

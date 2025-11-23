@@ -12,6 +12,8 @@ sealed class Errors(val error: String) {
     object FirebaseAuthUserCollisionException: Errors("Такой пользователь уже существует!")
     object NotFound: Errors("Не найдено!")
 
+    object CreateUserError: Errors("Ошибка при создании пользователя!")
+
     object NoInputData: Errors("Введи хоть что-то!")
 
     object EmptyEmail: Errors("Введите почту!")

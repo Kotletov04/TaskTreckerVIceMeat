@@ -28,7 +28,7 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUserById(id: String): UserModel {
+    override suspend fun getUserById(id: String): UserModel? {
         val baseUserInfo = firebaseDb.collection("users").whereEqualTo("id", id).get().await()
         return baseUserInfo.first().toObject(UserDto::class.java).toUserModel(userId = baseUserInfo.first().id)
     }

@@ -12,19 +12,15 @@ import java.io.IOException
 
 class CreateUserUseCase(private val userRepository: UserRepository) {
 
-    operator fun invoke(
-        username: String,
-        email: String,
-        role: String = "User"
-    ): Flow<Resource<Boolean>> = flow {
+    operator fun invoke(username: String, email: String, role: String = "User"): Flow<Resource<Boolean>> = flow {
         try {
+            if (username.isBlank() || email.isBlank() || role.isBlank()) {
+                emit(Resource.Error(message = Errors.CreateUserError.error))
+                return@flow
+            }
             emit(Resource.Loading())
             val result = userRepository.createUser(user = UserModel(username = username, email = email, role = role))
-            if (result == true) {
-                emit(Resource.Success(data = result))
-            } else {
-                emit(Resource.Error(message = Errors.UnknownError.error))
-            }
+            emit(Resource.Success(data = result))
         } catch (e: IOException) {
             emit(Resource.Error(message = Errors.IOException.error))
         } catch (e: Exception) {
