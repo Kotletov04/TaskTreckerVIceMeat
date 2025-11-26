@@ -9,7 +9,21 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 
+
+
+
+
+
 class CreateNewHubUseCase(private val hubRepository: HubRepository) {
+
+    /**
+     * Создает новый HUB. Обязательные параметры:
+     * - [title]: Название Hub`a
+     * - [adminName]: Имя админа - то есть создателя хаба
+     * - [adminId]: Id админа
+     * - [isOpen]: Определяет будет ли Hub виден у всех пользователей в ленте или только у приглашенных
+     * Поле является необязательным [invitedUsers] - Пользователи, приглашенный в созданный хаб изначально.
+     */
 
     operator fun invoke(
         title: String?,

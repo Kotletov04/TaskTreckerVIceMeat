@@ -9,6 +9,11 @@ import java.io.IOException
 
 class LoginUseCase(private val authRepository: AuthRepository) {
 
+    /**
+    * Производит авторизацию по [email] и [password]. В случае успеха возвращает [true],
+     * при пустых полях отрабатывает олшибку [Errors.NoInputData] или [Errors.InvalidData]
+    * */
+
     operator fun invoke(email: String, password: String): Flow<Resource<Boolean>> = flow {
         try {
             if (email == "" && password == "") {

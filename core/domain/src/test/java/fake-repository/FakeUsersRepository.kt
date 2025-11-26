@@ -1,4 +1,4 @@
-package repository
+package `fake-repository`
 
 import com.example.domain.model.UserModel
 import com.example.domain.repository.UserRepository
@@ -22,22 +22,34 @@ class FakeUsersRepository: UserRepository {
         )
     )
 
+    var userIsNull = false
+
     override suspend fun getAllUsers(): List<UserModel> {
         return fakeDb
     }
 
     override suspend fun getCurrentUser(): UserModel? {
-        return UserModel(
-            id = "1",
-            username = "KotelTapunk",
-            email = "test@mail.com",
-            hubs = emptyList(),
-            role = "User"
-        )
+        return if (!userIsNull) {
+            UserModel(
+                id = "1",
+                username = "KotelTapunk",
+                email = "test@mail.com",
+                hubs = emptyList(),
+                role = "User"
+            )
+        } else {
+            null
+        }
     }
 
     override suspend fun getUserById(id: String): UserModel? {
-        return fakeDb.find { it.id == id }
+        return if (!userIsNull) {
+            fakeDb.find { it.id == id }
+        } else {
+            null
+        }
+
+
     }
 
     override suspend fun createUser(user: UserModel): Boolean {

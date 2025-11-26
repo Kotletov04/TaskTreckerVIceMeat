@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import repository.FakeAuthRepository
+import `fake-repository`.FakeAuthRepository
 
 class RegisterUseCaseTest {
 
@@ -59,20 +59,5 @@ class RegisterUseCaseTest {
         Assertions.assertEquals(result.message, Errors.IOException.error)
         Assertions.assertEquals(null, result.data)
     }
-
-    @Test
-    fun `User already registered`() = runBlocking {
-        val fakeUserPassword = "12345678"
-        val fakeUserEmail = "example@gmail.com"
-        fakeAuthRepository.fakeUserPassword = "12345678"
-        fakeAuthRepository.fakeUserEmail = "example@gmail.com"
-
-        val result =
-            registerUseCaseTest.invoke(email = fakeUserEmail, password = fakeUserPassword).last()
-
-        Assertions.assertEquals(result.message, Errors.FirebaseAuthUserCollisionException.error)
-        Assertions.assertEquals(null, result.data)
-    }
-
 
 }

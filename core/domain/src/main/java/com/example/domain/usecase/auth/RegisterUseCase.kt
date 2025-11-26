@@ -6,8 +6,16 @@ import com.example.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
+import com.example.domain.model.UserModel
+import com.example.domain.usecase.users.CreateUserUseCase
 
 class RegisterUseCase(private val authRepository: AuthRepository) {
+
+    /**
+     * Регистрирует нового пользователя по [email] и [password]. Возвращает [true] при успешной регистрации.
+     * Пароль не может быть меньше 8 знаков, иначе возвращает [Errors.FirebaseAuthWeakPasswordException].
+     * UseCase не создает [UserModel], при регистрации, его нужно использовать вместе с другим UseCase [CreateUserUseCase]
+    * */
 
     operator fun invoke(email: String, password: String): Flow<Resource<Boolean>> = flow {
         try {

@@ -1,4 +1,4 @@
-package repository
+package `fake-repository`
 
 import com.example.domain.repository.AuthRepository
 import java.io.IOException

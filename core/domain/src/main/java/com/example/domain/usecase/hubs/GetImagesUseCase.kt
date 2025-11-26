@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.flow
 
 class GetImagesUseCase(private val mediaRepository: MediaRepository) {
     operator fun invoke(): Flow<Resource<List<ImageModel>>> = flow {
-
         val result = mediaRepository.getImages()
         emit(Resource.Success(data = result))
     }

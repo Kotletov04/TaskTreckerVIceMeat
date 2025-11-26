@@ -12,6 +12,16 @@ import java.io.IOException
 
 class CreateUserUseCase(private val userRepository: UserRepository) {
 
+    /**
+     * Создает нового пользователя по [username], [email], которые являются обязательными.
+     * Поле [role] является необязательным и на данный момент не используется, но может быть использовано
+     * для определение платных\бесплат  ных пользователей админов\организаций и т.д. По умолчанию [role] = "User"
+     *
+     * [invoke] в случае успешного завершения возвращает [true], обозначающий,
+     * что пользователь был создан и [false], если что-то пошло не так
+     */
+
+
     operator fun invoke(username: String, email: String, role: String = "User"): Flow<Resource<Boolean>> = flow {
         try {
             if (username.isBlank() || email.isBlank() || role.isBlank()) {

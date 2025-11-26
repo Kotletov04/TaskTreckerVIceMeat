@@ -9,6 +9,11 @@ import java.io.IOException
 
 class VerifyCheckEmailUseCase(private val authRepository: AuthRepository) {
 
+    /**
+    * Проверяет подтвердил ли пользователь свою почту при регистрации.
+     * Если почта подтверждена по письму, отправленному на почту, то возвращает [true]
+    * */
+
     operator fun invoke(): Flow<Resource<Boolean>> = flow {
         try {
             emit(Resource.Loading())

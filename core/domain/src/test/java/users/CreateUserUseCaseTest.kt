@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import repository.FakeUsersRepository
+import `fake-repository`.FakeUsersRepository
 
 class CreateUserUseCaseTest {
 
@@ -26,8 +26,7 @@ class CreateUserUseCaseTest {
     fun `Default launch`() = runBlocking {
         val user = UserModel(email = "reutov@gmail.com", username = "TV", role = "User")
 
-        val result =
-            createUserUseCaseTest.invoke(email = user.email, username = user.username).last()
+        val result = createUserUseCaseTest.invoke(email = user.email, username = user.username).last()
 
         Assertions.assertEquals(result.data, true)
         Assertions.assertEquals(user, fakeUsersRepository.fakeDb.last())
@@ -40,8 +39,7 @@ class CreateUserUseCaseTest {
         val userFakeEmail = ""
         val userFakeUsername = ""
 
-        val result =
-            createUserUseCaseTest.invoke(username = userFakeUsername, email = userFakeEmail).last()
+        val result = createUserUseCaseTest.invoke(username = userFakeUsername, email = userFakeEmail).last()
 
         Assertions.assertEquals(result.message, Errors.CreateUserError.error)
         Assertions.assertEquals(result.data, null)

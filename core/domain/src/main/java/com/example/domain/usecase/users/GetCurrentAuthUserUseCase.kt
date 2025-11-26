@@ -10,6 +10,10 @@ import java.io.IOException
 
 class GetCurrentAuthUserUseCase(private val userRepository: UserRepository) {
 
+    /**
+     * Возвращает [UserModel] текущего авторизованного пользователя.
+     * */
+
     operator fun invoke(): Flow<Resource<UserModel>> = flow {
         try {
             emit(Resource.Loading())

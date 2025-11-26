@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import repository.FakeAuthRepository
+import `fake-repository`.FakeAuthRepository
 
 class LoginUseCaseTest {
 
