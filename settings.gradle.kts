@@ -34,5 +34,4 @@ include(":feature:loading")
 include(":feature:feature-common")
 include(":core:common")
 include(":feature:media-container")
-include(":core:firebase")
-include(":core:remote-service")
+
