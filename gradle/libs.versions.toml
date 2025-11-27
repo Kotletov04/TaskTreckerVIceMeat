@@ -35,6 +35,7 @@ androidGradlePlugin = "8.9.0"
 androidTools = "31.9.0"
 firebasePerfPlugin = "2.0.1"
 firebaseCrashlyticsPlugin = "3.0.6"
+junit = "4.13.2"
 
 
 
@@ -117,6 +118,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp-version" }
 # Gradle-плагин для Room Database
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 
 
