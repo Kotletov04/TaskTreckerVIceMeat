@@ -1,38 +1,12 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    id("androidx.room")
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.meatvice.android.library)
+    alias(libs.plugins.meatvice.firebase)
+    alias(libs.plugins.meatvice.hilt)
+    alias(libs.plugins.room)
 }
 
 android {
     namespace = "com.example.data"
-    compileSdk = 35
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     room {
         schemaDirectory("$projectDir/schemas")
     }
@@ -41,18 +15,6 @@ android {
 dependencies {
     // module
     implementation(project(":core:domain"))
-
-    // firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analitycs)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.auth.play.services)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.base.play.services)
-
-    // hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
 
     // room
     implementation(libs.androidx.room.runtime)
