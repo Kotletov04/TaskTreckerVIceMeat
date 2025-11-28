@@ -76,7 +76,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun verifyCheckEmail(): Boolean {
         try {
-            firebaseAuth.currentUser!!.reload()
+            firebaseAuth.currentUser!!.reload().await()
             return firebaseAuth.currentUser?.isEmailVerified == true
         } catch (e: Exception) {
             throw Exception(Errors.UnknownError.error)

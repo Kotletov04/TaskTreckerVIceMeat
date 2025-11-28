@@ -119,7 +119,7 @@ class AuthViewModel @Inject constructor(
                     _state.value = AuthState(error = result.message)
                 }
                 is Resource.Success -> {
-                    _state.value = AuthState(permission = true)
+                    _state.value = AuthState(permission = result.data)
                 }
             }
         }.launchIn(viewModelScope)

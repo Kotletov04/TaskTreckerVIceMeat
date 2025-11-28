@@ -47,6 +47,7 @@ fun  RegistrationScreenVerifyEmail(
     val state = viewModel.state.value
 
     LaunchedEffect(key1 = state.permission) {
+        println(state.permission)
         if (viewModel.state.value.permission == true) {
             viewModel.createNewUser()
             onClickComplete()

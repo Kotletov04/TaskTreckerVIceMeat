@@ -18,7 +18,11 @@ class VerifyCheckEmailUseCase(private val authRepository: AuthRepository) {
         try {
             emit(Resource.Loading())
             val emailIsValid = authRepository.verifyCheckEmail()
-            emit(Resource.Success(data = emailIsValid))
+            if (emailIsValid == false) {
+                emit(Resource.Error(Errors.NotConfirmedEmail.error))
+                return@flow
+            }
+            emit(Resource.Success(data = true))
         } catch (e: IOException) {
             emit(Resource.Error(message = Errors.IOException.error))
         } catch (e: Exception) {

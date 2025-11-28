@@ -22,5 +22,7 @@ sealed class Errors(val error: String) {
     object EmptyRepeatPassword: Errors("Повторите пароль!")
     object PasswordDoNotMatch: Errors("Пароли не совпадают!")
 
+    object NotConfirmedEmail: Errors("Почта не подтверждена!")
+
 
 }
