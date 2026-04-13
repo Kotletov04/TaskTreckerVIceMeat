@@ -39,7 +39,6 @@ dependencies {
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 
-
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":core:designsystem"))
@@ -67,7 +66,6 @@ dependencies {
     implementation(libs.aws.sdk)
 
     // testing
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4)

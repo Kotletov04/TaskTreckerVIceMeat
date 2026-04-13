@@ -10,13 +10,13 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import com.example.domain.util.ErrorMessages
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.coroutines.cancellation.CancellationException
 import androidx.core.content.edit
+import com.example.domain.util.Errors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -37,14 +37,12 @@ class AuthRepositoryImpl @Inject constructor(
         try {
             val authTask = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             return authTask.user != null
-        } catch (e: FirebaseAuthInvalidUserException) {
-            throw Exception(ErrorMessages.firebaseAuthInvalidUserException)
         } catch (e: FirebaseAuthInvalidCredentialsException) {
-            throw Exception(ErrorMessages.firebaseAuthInvalidCredentialsException)
+            throw Exception(Errors.FirebaseAuthInvalidCredentialsException.error)
         } catch (e: CancellationException) {
-            throw Exception(ErrorMessages.cancellationException)
+            throw Exception(Errors.CancellationException.error)
         } catch (e: Exception) {
-            throw Exception(ErrorMessages.unknownError)
+            throw Exception(Errors.UnknownError.error)
         }
 
     }
@@ -67,21 +65,21 @@ class AuthRepositoryImpl @Inject constructor(
             registerTask.user!!.sendEmailVerification()
             return registerTask.user != null
         } catch (e: FirebaseAuthWeakPasswordException) {
-            throw Exception(ErrorMessages.firebaseAuthWeakPasswordException)
+            throw Exception(Errors.FirebaseAuthWeakPasswordException.error)
         } catch (e: FirebaseAuthInvalidCredentialsException) {
-            throw Exception(ErrorMessages.firebaseAuthInvalidCredentialsException)
+            throw Exception(Errors.FirebaseAuthInvalidCredentialsException.error)
         } catch (e: FirebaseAuthUserCollisionException) {
-            throw Exception(ErrorMessages.firebaseAuthUserCollisionException)
+            throw Exception(Errors.FirebaseAuthUserCollisionException.error)
         }
     }
 
 
     override suspend fun verifyCheckEmail(): Boolean {
         try {
-            firebaseAuth.currentUser!!.reload()
+            firebaseAuth.currentUser!!.reload().await()
             return firebaseAuth.currentUser?.isEmailVerified == true
         } catch (e: Exception) {
-            throw Exception(ErrorMessages.unknownError)
+            throw Exception(Errors.UnknownError.error)
         }
 
     }

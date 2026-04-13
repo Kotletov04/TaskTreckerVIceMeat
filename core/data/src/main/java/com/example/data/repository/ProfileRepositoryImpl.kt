@@ -5,7 +5,7 @@ import com.example.data.dto.UserDto
 import com.example.domain.model.ProfileCustomFieldsModel
 import com.example.domain.model.UserModel
 import com.example.domain.repository.ProfileRepository
-import com.example.domain.util.ErrorMessages
+import com.example.domain.util.Errors
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -20,9 +20,9 @@ class ProfileRepositoryImpl @Inject constructor(
             val userModel = baseUserInfo.first().toObject(UserDto::class.java).toUserModel(userId = "1")
             return userModel
         } catch (e: Exception) {
-            throw Exception(ErrorMessages.unknownError)
+            throw Exception(Errors.UnknownError.error)
         } catch (e: NullPointerException) {
-            throw Exception(ErrorMessages.notFound)
+            throw Exception(Errors.NotFound.error)
         }
     }
 
@@ -32,7 +32,7 @@ class ProfileRepositoryImpl @Inject constructor(
             val customFieldsModel = customProfileFields.map { it.toObject(ProfileCustomFieldsDto::class.java).toProfileCustomFieldsModel() }
             TODO("Not yet implemented")
         } catch (e: Exception) {
-            throw Exception(ErrorMessages.unknownError)
+            throw Exception(Errors.UnknownError.error)
         }
     }
 

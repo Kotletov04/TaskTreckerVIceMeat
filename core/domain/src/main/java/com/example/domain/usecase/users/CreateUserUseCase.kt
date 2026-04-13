@@ -2,7 +2,7 @@ package com.example.domain.usecase.users
 
 import com.example.domain.model.UserModel
 import com.example.domain.repository.UserRepository
-import com.example.domain.util.ErrorMessages
+import com.example.domain.util.Errors
 
 import com.example.domain.util.Resource
 import jdk.jfr.internal.OldObjectSample.emit
@@ -12,23 +12,29 @@ import java.io.IOException
 
 class CreateUserUseCase(private val userRepository: UserRepository) {
 
-    operator fun invoke(
-        username: String,
-        email: String,
-        role: String = "User"
-    ): Flow<Resource<Boolean>> = flow {
+    /**
+     * Создает нового пользователя по [username], [email], которые являются обязательными.
+     * Поле [role] является необязательным и на данный момент не используется, но может быть использовано
+     * для определение платных\бесплат  ных пользователей админов\организаций и т.д. По умолчанию [role] = "User"
+     *
+     * [invoke] в случае успешного завершения возвращает [true], обозначающий,
+     * что пользователь был создан и [false], если что-то пошло не так
+     */
+
+
+    operator fun invoke(username: String, email: String, role: String = "User"): Flow<Resource<Boolean>> = flow {
         try {
+            if (username.isBlank() || email.isBlank() || role.isBlank()) {
+                emit(Resource.Error(message = Errors.CreateUserError.error))
+                return@flow
+            }
             emit(Resource.Loading())
             val result = userRepository.createUser(user = UserModel(username = username, email = email, role = role))
-            if (result == true) {
-                emit(Resource.Success(data = result))
-            } else {
-                emit(Resource.Error(message = ErrorMessages.unknownError))
-            }
+            emit(Resource.Success(data = result))
         } catch (e: IOException) {
-            emit(Resource.Error(message = ErrorMessages.ioException))
+            emit(Resource.Error(message = Errors.IOException.error))
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage?: ErrorMessages.unknownError))
+            emit(Resource.Error(message = e.localizedMessage?: Errors.UnknownError.error))
         }
     }
 }

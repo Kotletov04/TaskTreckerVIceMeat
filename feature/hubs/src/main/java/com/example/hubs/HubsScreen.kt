@@ -93,7 +93,10 @@ fun HubsScreen(
     HubsMain(
         viewModel = viewModel,
         onClickProfile = onClickProfile,
-        onClickLogout = onClickLogout,
+        onClickLogout = {
+            onClickLogout()
+            viewModel.logout()
+                        },
         onClickCreateNewHub = {
             viewModel.createNewHub()
             viewModel.cleanCreateHubFields()
@@ -152,7 +155,9 @@ fun HubsMain(
                         onClick = { /* Handle click */ },
                     )
                     CustomButton(
-                        onClick = {onClickLogout.invoke()},
+                        onClick = {
+                            onClickLogout.invoke()
+                                  },
                         text = "Выйти"
                     )
                 }

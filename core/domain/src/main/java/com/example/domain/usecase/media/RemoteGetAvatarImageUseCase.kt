@@ -1,7 +1,6 @@
 package com.example.domain.usecase.media
 
 import com.example.domain.repository.MediaRepository
-import com.example.domain.util.ErrorMessages
 import com.example.domain.util.Errors
 import com.example.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +17,9 @@ class RemoteGetAvatarImageUseCase(private val mediaRepository: MediaRepository) 
             val result = mediaRepository.getAvatarImage(bucket = bucket, userId = userId)
             emit(Resource.Success(data = result))
         } catch (e: IOException) {
-            emit(Resource.Error(message = ErrorMessages.ioException))
+            emit(Resource.Error(message = Errors.IOException.error))
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage))
+            emit(Resource.Error(message = e.localizedMessage?: Errors.UnknownError.error))
         }
     }
 
